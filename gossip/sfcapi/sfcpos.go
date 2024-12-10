@@ -1,8 +1,8 @@
 package sfcapi
 
 import (
+	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
 )
 
 // Events
@@ -27,14 +27,14 @@ var (
 		Delegated               common.Hash
 		Undelegated             common.Hash
 	}{
-		ClaimedRewards:          crypto.Keccak256Hash([]byte("ClaimedRewards(address,uint256,uint256,uint256,uint256)")),
-		RestakedRewards:         crypto.Keccak256Hash([]byte("RestakedRewards(address,uint256,uint256,uint256,uint256)")),
-		ClaimedDelegationReward: crypto.Keccak256Hash([]byte("ClaimedDelegationReward(address,uint256,uint256,uint256,uint256)")),
-		ClaimedValidatorReward:  crypto.Keccak256Hash([]byte("ClaimedValidatorReward(uint256,uint256,uint256,uint256)")),
-		CreatedValidator:        crypto.Keccak256Hash([]byte("CreatedValidator(uint256,address,uint256,uint256)")),
-		DeactivatedValidator:    crypto.Keccak256Hash([]byte("DeactivatedValidator(uint256,uint256,uint256)")),
-		ChangedValidatorStatus:  crypto.Keccak256Hash([]byte("ChangedValidatorStatus(uint256,uint256)")),
-		Delegated:               crypto.Keccak256Hash([]byte("Delegated(address,uint256,uint256)")),
-		Undelegated:             crypto.Keccak256Hash([]byte("Undelegated(address,uint256,uint256,uint256)")),
+		ClaimedRewards:          utils.Keccak512Hash([]byte("ClaimedRewards(address,uint256,uint256,uint256,uint256)")),
+		RestakedRewards:         utils.Keccak512Hash([]byte("RestakedRewards(address,uint256,uint256,uint256,uint256)")),
+		ClaimedDelegationReward: utils.Keccak512Hash([]byte("ClaimedDelegationReward(address,uint256,uint256,uint256,uint256)")),
+		ClaimedValidatorReward:  utils.Keccak512Hash([]byte("ClaimedValidatorReward(uint256,uint256,uint256,uint256)")),
+		CreatedValidator:        utils.Keccak512Hash([]byte("CreatedValidator(uint256,address,uint256,uint256)")),
+		DeactivatedValidator:    utils.Keccak512Hash([]byte("DeactivatedValidator(uint256,uint256,uint256)")),
+		ChangedValidatorStatus:  utils.Keccak512Hash([]byte("ChangedValidatorStatus(uint256,uint256)")),
+		Delegated:               utils.Keccak512Hash([]byte("Delegated(address,uint256,uint256)")),
+		Undelegated:             utils.Keccak512Hash([]byte("Undelegated(address,uint256,uint256,uint256)")),
 	}
 )

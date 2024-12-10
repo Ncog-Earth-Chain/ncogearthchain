@@ -21,7 +21,7 @@ import (
 )
 
 var (
-	emptyCodeHash = common.BytesToHash(crypto.Keccak256(nil))
+	emptyCodeHash = common.BytesToHash(crypto.Keccak512(nil))
 	emptyHash     = common.Hash{}
 )
 
@@ -57,7 +57,7 @@ func checkEvm(ctx *cli.Context) error {
 		if len(nodeIt.Key()) != 32 {
 			continue
 		}
-		calcHash := crypto.Keccak256(nodeIt.Value())
+		calcHash := crypto.Keccak512(nodeIt.Value())
 		if !bytes.Equal(nodeIt.Key(), calcHash) {
 			log.Crit("Malformed node record", "exp", common.Bytes2Hex(calcHash), "got", common.Bytes2Hex(nodeIt.Key()))
 		}
@@ -70,7 +70,7 @@ func checkEvm(ctx *cli.Context) error {
 		if len(codeIt.Key()) != 32 {
 			continue
 		}
-		calcHash := crypto.Keccak256(codeIt.Value())
+		calcHash := crypto.Keccak512(codeIt.Value())
 		if !bytes.Equal(codeIt.Key(), calcHash) {
 			log.Crit("Malformed code record", "exp", common.Bytes2Hex(calcHash), "got", common.Bytes2Hex(codeIt.Key()))
 		}
@@ -83,7 +83,7 @@ func checkEvm(ctx *cli.Context) error {
 		if len(preimageIt.Key()) != 32 {
 			continue
 		}
-		calcHash := crypto.Keccak256(preimageIt.Value())
+		calcHash := crypto.Keccak512(preimageIt.Value())
 		if !bytes.Equal(preimageIt.Key(), calcHash) {
 			log.Crit("Malformed preimage record", "exp", common.Bytes2Hex(calcHash), "got", common.Bytes2Hex(preimageIt.Key()))
 		}
