@@ -39,6 +39,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/cryptod"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/p2p"
 	"github.com/ethereum/go-ethereum/params"
@@ -301,7 +302,7 @@ func fetchKeystore(am *accounts.Manager) (*keystore.KeyStore, error) {
 
 // ImportRawKey stores the given hex encoded ECDSA key into the key directory,
 // encrypting it with the passphrase.
-func (s *PrivateAccountAPI) ImportRawKey(privkey string, password string) (common.Address, error) {
+/* func (s *PrivateAccountAPI) ImportRawKey(privkey string, password string) (common.Address, error) {
 	key, err := crypto.HexToECDSA(privkey)
 	if err != nil {
 		return common.Address{}, err
@@ -312,6 +313,30 @@ func (s *PrivateAccountAPI) ImportRawKey(privkey string, password string) (commo
 	}
 	acc, err := ks.ImportECDSA(key, password)
 	return acc.Address, err
+} */
+
+// ImportRawKey stores the given hex encoded MLDSA87 key into the key directory,
+// encrypting it with the passphrase.
+func (s *PrivateAccountAPI) ImportRawKey(privkey string, password string) (common.Address, error) {
+	// Convert the hex encoded key to an MLDSA87 private key
+	key, err := cryptod.HexToMLDsa87(privkey)
+	if err != nil {
+		return common.Address{}, err
+	}
+
+	// Fetch the keystore associated with the account manager
+	ks, err := fetchKeystore(s.am)
+	if err != nil {
+		return common.Address{}, err
+	}
+
+	// Import the MLDSA87 private key into the keystore
+	acc, err := ks.ImportMLDSA87(key, password)
+	if err != nil {
+		return common.Address{}, err
+	}
+
+	return acc.Address, nil
 }
 
 // UnlockAccount will unlock the account associated with the given address with
@@ -675,10 +700,10 @@ func (s *PublicBlockChainAPI) calculateLogsBloom(ctx context.Context, blkNumber 
 }
 
 // GetBlockByNumber returns the requested canonical block.
-// * When blockNr is -1 the chain head is returned.
-// * When blockNr is -2 the pending chain head is returned.
-// * When fullTx is true all transactions in the block are returned, otherwise
-//   only the transaction hash is returned.
+//   - When blockNr is -1 the chain head is returned.
+//   - When blockNr is -2 the pending chain head is returned.
+//   - When fullTx is true all transactions in the block are returned, otherwise
+//     only the transaction hash is returned.
 func (s *PublicBlockChainAPI) GetBlockByNumber(ctx context.Context, number rpc.BlockNumber, fullTx bool) (map[string]interface{}, error) {
 	block, err := s.b.BlockByNumber(ctx, number)
 	if block != nil && err == nil {

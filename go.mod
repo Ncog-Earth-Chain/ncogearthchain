@@ -7,6 +7,7 @@ toolchain go1.22.10
 require (
 	github.com/Ncog-Earth-Chain/forest-base v0.1.3
 	github.com/cespare/cp v1.1.1
+	github.com/cloudflare/circl v1.5.0
 	github.com/davecgh/go-spew v1.1.1
 	github.com/deckarep/golang-set v1.7.1
 	github.com/docker/docker v1.13.1
@@ -99,5 +100,7 @@ require (
 // replace github.com/ethereum/go-ethereum => github.com/Ncog-Earth-Chain/go-ethereum v1.0.5
 
 replace github.com/ethereum/go-ethereum => github.com/yashveerncog/ncogevm_v2 v1.0.2
+
+//replace github.com/ethereum/go-ethereum => /var/www/html/Ncog-Earth-Chain/ethereum/v4/ncogevm_v2
 
 replace github.com/dvyukov/go-fuzz => github.com/guzenok/go-fuzz v0.0.0-20210103140116-f9104dfb626f

@@ -13,6 +13,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/ethereum/go-ethereum/cmd/utils"
 	"github.com/ethereum/go-ethereum/console/prompt"
+	"github.com/ethereum/go-ethereum/cryptod"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/node"
@@ -42,17 +43,17 @@ var (
 	// The app that holds all commands and flags.
 	app = flags.NewApp(gitCommit, gitDate, "the go-ncogearthchain command line interface")
 
-	nodeFlags        []cli.Flag
-	testFlags        []cli.Flag
-	gpoFlags         []cli.Flag
-	accountFlags     []cli.Flag
-	performanceFlags []cli.Flag
-	networkingFlags  []cli.Flag
-	txpoolFlags      []cli.Flag
-	ncogearthchainFlags      []cli.Flag
-	legacyRpcFlags   []cli.Flag
-	rpcFlags         []cli.Flag
-	metricsFlags     []cli.Flag
+	nodeFlags           []cli.Flag
+	testFlags           []cli.Flag
+	gpoFlags            []cli.Flag
+	accountFlags        []cli.Flag
+	performanceFlags    []cli.Flag
+	networkingFlags     []cli.Flag
+	txpoolFlags         []cli.Flag
+	ncogearthchainFlags []cli.Flag
+	legacyRpcFlags      []cli.Flag
+	rpcFlags            []cli.Flag
+	metricsFlags        []cli.Flag
 )
 
 func initFlags() {
@@ -263,7 +264,7 @@ func forestMain(ctx *cli.Context) error {
 	return nil
 }
 
-func makeNode(ctx *cli.Context, cfg *config, genesis integration.InputGenesis) (*node.Node, *gossip.Service, func()) {
+/* func makeNode(ctx *cli.Context, cfg *config, genesis integration.InputGenesis) (*node.Node, *gossip.Service, func()) {
 	// check errlock file
 	errlock.SetDefaultDatadir(cfg.Node.DataDir)
 	errlock.Check()
@@ -297,6 +298,128 @@ func makeNode(ctx *cli.Context, cfg *config, genesis integration.InputGenesis) (
 
 	// Create and register a gossip network service.
 
+	svc, err := gossip.NewService(stack, cfg.Ncogearthchain, gdb, signer, blockProc, engine, dagIndex)
+	if err != nil {
+		utils.Fatalf("Failed to create the service: %v", err)
+	}
+	err = engine.Bootstrap(svc.GetConsensusCallbacks())
+	if err != nil {
+		utils.Fatalf("Failed to bootstrap the engine: %v", err)
+	}
+
+	stack.RegisterAPIs(svc.APIs())
+	stack.RegisterProtocols(svc.Protocols())
+	stack.RegisterLifecycle(svc)
+
+	return stack, svc, func() {
+		_ = stack.Close()
+		gdb.Close()
+		_ = cdb.Close()
+		genesisStore.Close()
+	}
+}  */
+
+/* func makeNode(ctx *cli.Context, cfg *config, genesis integration.InputGenesis) (*node.Node, *gossip.Service, func()) {
+	// check errlock file
+	errlock.SetDefaultDatadir(cfg.Node.DataDir)
+	errlock.Check()
+
+	stack := makeConfigNode(ctx, &cfg.Node)
+
+	chaindataDir := path.Join(cfg.Node.DataDir, "chaindata")
+	if err := os.MkdirAll(chaindataDir, 0700); err != nil {
+		utils.Fatalf("Failed to create chaindata directory: %v", err)
+	}
+	engine, dagIndex, gdb, cdb, genesisStore, blockProc := integration.MakeEngine(integration.DBProducer(chaindataDir, cacheScaler(ctx)), genesis, cfg.AppConfigs())
+	_ = genesis.Close()
+	metrics.SetDataDir(cfg.Node.DataDir)
+
+	valKeystore := valkeystore.NewDefaultFileKeystore(path.Join(getValKeystoreDir(cfg.Node), "validator"))
+	valPubkey := cfg.Ncogearthchain.Emitter.Validator.PubKey
+	if key := getFakeValidatorKey(ctx); key != nil && cfg.Ncogearthchain.Emitter.Validator.ID != 0 {
+		// Convert ECDSA key to MLDSA87 key
+		mldsaKey, err := cryptod.ToMLDsa87Key(key) // Assuming `ToMLDsa87Key` handles conversion
+		if err != nil {
+			utils.Fatalf("Failed to convert ECDSA key to MLDSA87 key: %v", err)
+		}
+
+		// Use the converted MLDSA87 key
+		addFakeValidatorKey(ctx, mldsaKey, valPubkey, valKeystore)
+		coinbase := integration.SetAccountKey(stack.AccountManager(), mldsaKey, "fakepassword")
+		log.Info("Unlocked fake validator account", "address", coinbase.Address.Hex())
+	}
+
+	// unlock validator key
+	if !valPubkey.Empty() {
+		err := unlockValidatorKey(ctx, valPubkey, valKeystore)
+		if err != nil {
+			utils.Fatalf("Failed to unlock validator key: %v", err)
+		}
+	}
+	signer := valkeystore.NewSigner(valKeystore)
+
+	// Create and register a gossip network service.
+	svc, err := gossip.NewService(stack, cfg.Ncogearthchain, gdb, signer, blockProc, engine, dagIndex)
+	if err != nil {
+		utils.Fatalf("Failed to create the service: %v", err)
+	}
+	err = engine.Bootstrap(svc.GetConsensusCallbacks())
+	if err != nil {
+		utils.Fatalf("Failed to bootstrap the engine: %v", err)
+	}
+
+	stack.RegisterAPIs(svc.APIs())
+	stack.RegisterProtocols(svc.Protocols())
+	stack.RegisterLifecycle(svc)
+
+	return stack, svc, func() {
+		_ = stack.Close()
+		gdb.Close()
+		_ = cdb.Close()
+		genesisStore.Close()
+	}
+} */
+
+func makeNode(ctx *cli.Context, cfg *config, genesis integration.InputGenesis) (*node.Node, *gossip.Service, func()) {
+	// check errlock file
+	errlock.SetDefaultDatadir(cfg.Node.DataDir)
+	errlock.Check()
+
+	stack := makeConfigNode(ctx, &cfg.Node)
+
+	chaindataDir := path.Join(cfg.Node.DataDir, "chaindata")
+	if err := os.MkdirAll(chaindataDir, 0700); err != nil {
+		utils.Fatalf("Failed to create chaindata directory: %v", err)
+	}
+	engine, dagIndex, gdb, cdb, genesisStore, blockProc := integration.MakeEngine(integration.DBProducer(chaindataDir, cacheScaler(ctx)), genesis, cfg.AppConfigs())
+	_ = genesis.Close()
+	metrics.SetDataDir(cfg.Node.DataDir)
+
+	valKeystore := valkeystore.NewDefaultFileKeystore(path.Join(getValKeystoreDir(cfg.Node), "validator"))
+	valPubkey := cfg.Ncogearthchain.Emitter.Validator.PubKey
+	if key := getFakeValidatorKey(ctx); key != nil && cfg.Ncogearthchain.Emitter.Validator.ID != 0 {
+		// Generate a new MLDSA87 private key
+		mldsaKey, err := cryptod.GenerateMLDsa87Key()
+		if err != nil {
+			utils.Fatalf("Failed to generate MLDSA87 key: %v", err)
+		}
+
+		// Add the MLDSA87 private key
+		addFakeValidatorKey(ctx, mldsaKey, valPubkey, valKeystore)
+		coinbase := integration.SetAccountKey(stack.AccountManager(), mldsaKey, "fakepassword")
+		log.Info("Unlocked fake validator account", "address", coinbase.Address.Hex())
+	}
+
+	// Unlock validator key
+	if !valPubkey.Empty() {
+		err := unlockValidatorKey(ctx, valPubkey, valKeystore)
+		if err != nil {
+			utils.Fatalf("Failed to unlock validator key: %v", err)
+		}
+	}
+	signer := valkeystore.NewSigner(valKeystore)
+
+	// Create and register a gossip network service
 	svc, err := gossip.NewService(stack, cfg.Ncogearthchain, gdb, signer, blockProc, engine, dagIndex)
 	if err != nil {
 		utils.Fatalf("Failed to create the service: %v", err)

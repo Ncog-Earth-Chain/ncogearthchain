@@ -1,7 +1,6 @@
 package integration
 
 import (
-	"crypto/ecdsa"
 	"errors"
 	"fmt"
 
@@ -13,7 +12,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/cryptod"
 	"github.com/ethereum/go-ethereum/log"
 
 	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip"
@@ -35,12 +34,12 @@ func (e *GenesisMismatchError) Error() string {
 }
 
 type Configs struct {
-	Ncogearthchain         gossip.Config
-	NcogearthchainStore    gossip.StoreConfig
-	Forest         abft.Config
-	ForestStore    abft.StoreConfig
-	VectorClock    vecmt.IndexConfig
-	AllowedGenesis map[uint64]hash.Hash
+	Ncogearthchain      gossip.Config
+	NcogearthchainStore gossip.StoreConfig
+	Forest              abft.Config
+	ForestStore         abft.StoreConfig
+	VectorClock         vecmt.IndexConfig
+	AllowedGenesis      map[uint64]hash.Hash
 }
 
 type InputGenesis struct {
@@ -234,7 +233,7 @@ func MakeEngine(rawProducer kvdb.IterableDBProducer, genesis InputGenesis, cfg C
 }
 
 // SetAccountKey sets key into accounts manager and unlocks it with pswd.
-func SetAccountKey(
+/* func SetAccountKey(
 	am *accounts.Manager, key *ecdsa.PrivateKey, pswd string,
 ) (
 	acc accounts.Account,
@@ -260,6 +259,43 @@ func SetAccountKey(
 	err = ks.Unlock(acc, pswd)
 	if err != nil {
 		log.Crit("failed to unlock key", "err", err)
+	}
+
+	return
+}
+*/
+
+// SetAccountKey sets the key into accounts manager and unlocks it with the provided password.
+func SetAccountKey(
+	am *accounts.Manager, key *cryptod.PrivateKey, pswd string,
+) (
+	acc accounts.Account,
+) {
+	// Retrieve the keystore backend
+	kss := am.Backends(keystore.KeyStoreType)
+	if len(kss) < 1 {
+		log.Crit("Keystore is not found")
+		return
+	}
+	ks := kss[0].(*keystore.KeyStore)
+
+	// Derive the account address from the public key
+	acc = accounts.Account{
+		Address: cryptod.PubkeyToAddress(key.Public().(cryptod.PublicKey)),
+	}
+
+	// Attempt to import the key into the keystore
+	imported, err := ks.ImportMLDSA87(key, pswd)
+	if err == nil {
+		acc = imported
+	} else if err.Error() != "account already exists" {
+		log.Crit("Failed to import key", "err", err)
+	}
+
+	// Unlock the imported key
+	err = ks.Unlock(acc, pswd)
+	if err != nil {
+		log.Crit("Failed to unlock key", "err", err)
 	}
 
 	return

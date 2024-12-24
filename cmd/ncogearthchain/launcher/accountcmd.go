@@ -29,7 +29,7 @@ import (
 	"github.com/ethereum/go-ethereum/cmd/utils"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/console/prompt"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/cryptod"
 	"github.com/ethereum/go-ethereum/log"
 	"gopkg.in/urfave/cli.v1"
 )
@@ -366,6 +366,7 @@ func importWallet(ctx *cli.Context) error {
 	return nil
 }
 
+/*
 func accountImport(ctx *cli.Context) error {
 	keyfile := ctx.Args().First()
 	if len(keyfile) == 0 {
@@ -385,6 +386,41 @@ func accountImport(ctx *cli.Context) error {
 	if err != nil {
 		utils.Fatalf("Could not create the account: %v", err)
 	}
+	fmt.Printf("Address: {%x}\n", acct.Address)
+	return nil
+}
+*/
+
+func accountImport(ctx *cli.Context) error {
+	// Retrieve the key file path from the arguments
+	keyfile := ctx.Args().First()
+	if len(keyfile) == 0 {
+		utils.Fatalf("keyfile must be given as an argument")
+	}
+
+	// Load the private key as an MLDSA87 key
+	key, err := cryptod.LoadMLDsa87(keyfile) // Replace `crypto.LoadECDSA` with `cryptod.LoadMLDSA87Key`
+	if err != nil {
+		utils.Fatalf("Failed to load the private key: %v", err)
+	}
+
+	// Initialize configurations and stack
+	cfg := makeAllConfigs(ctx)
+	stack := makeConfigNode(ctx, &cfg.Node)
+
+	// Prompt the user for a password
+	passphrase := getPassPhrase("Your new account is locked with a password. Please give a password. Do not forget this password.", true, 0, utils.MakePasswordList(ctx))
+
+	// Access the keystore
+	ks := stack.AccountManager().Backends(keystore.KeyStoreType)[0].(*keystore.KeyStore)
+
+	// Import the MLDSA87 key into the keystore
+	acct, err := ks.ImportMLDSA87(key, passphrase) // Replace `ks.ImportECDSA` with `ks.ImportMLDSA87`
+	if err != nil {
+		utils.Fatalf("Could not create the account: %v", err)
+	}
+
+	// Print the address of the newly created account
 	fmt.Printf("Address: {%x}\n", acct.Address)
 	return nil
 }
