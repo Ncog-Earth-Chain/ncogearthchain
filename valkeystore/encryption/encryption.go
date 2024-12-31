@@ -78,7 +78,7 @@ func (ks Keystore) StoreKey(filename string, pubkey validatorpk.PubKey, key []by
 
 // EncryptKey encrypts a key using the specified scrypt parameters into a json
 // blob that can be decrypted later on.
-func (ks Keystore) EncryptKey(pubkey validatorpk.PubKey, key []byte, auth string) ([]byte, error) {
+/* func (ks Keystore) EncryptKey(pubkey validatorpk.PubKey, key []byte, auth string) ([]byte, error) {
 	if pubkey.Type != validatorpk.Types.Secp256k1 {
 		return nil, ErrNotSupportedType
 	}
@@ -92,6 +92,45 @@ func (ks Keystore) EncryptKey(pubkey validatorpk.PubKey, key []byte, auth string
 		Crypto:    cryptoStruct,
 	}
 	return json.Marshal(encryptedKeyJSON)
+} */
+
+func (ks Keystore) EncryptKey(pubkey validatorpk.PubKey, key []byte, auth string) ([]byte, error) {
+	// Validate inputs
+	if len(pubkey.Raw) == 0 || pubkey.Type == 0 {
+		return nil, fmt.Errorf("invalid public key: %+v", pubkey)
+	}
+	if len(key) == 0 {
+		return nil, fmt.Errorf("invalid key: key is empty")
+	}
+	if auth == "" {
+		return nil, fmt.Errorf("invalid auth: password is empty")
+	}
+
+	// Ensure the key type is MLDsa87
+	if pubkey.Type != validatorpk.Types.MLDsa87 {
+		return nil, fmt.Errorf("unsupported public key type: %x", pubkey.Type)
+	}
+
+	// Encrypt the key using MLDsa87 settings
+	cryptoStruct, err := keystore.EncryptDataV3(key, []byte(auth), ks.scryptN, ks.scryptP)
+	if err != nil {
+		return nil, fmt.Errorf("failed to encrypt key: %v", err)
+	}
+
+	// Create encrypted key JSON
+	encryptedKeyJSON := EncryptedKeyJSON{
+		Type:      pubkey.Type,
+		PublicKey: common.Bytes2Hex(pubkey.Raw),
+		Crypto:    cryptoStruct,
+	}
+
+	// Marshal the encrypted key to JSON
+	encryptedJSON, err := json.Marshal(encryptedKeyJSON)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal encrypted key JSON: %v", err)
+	}
+
+	return encryptedJSON, nil
 }
 
 // DecryptKey decrypts a key from a json blob, returning the private key itself.

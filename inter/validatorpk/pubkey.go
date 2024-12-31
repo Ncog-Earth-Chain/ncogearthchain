@@ -16,8 +16,10 @@ type PubKey struct {
 
 var Types = struct {
 	Secp256k1 uint8
+	MLDsa87   uint8
 }{
 	Secp256k1: 0xc0,
+	MLDsa87:   0xc1,
 }
 
 func (pk *PubKey) Empty() bool {
