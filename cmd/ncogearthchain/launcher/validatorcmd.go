@@ -137,24 +137,32 @@ func validatorKeyCreate(ctx *cli.Context) error {
 	privateKey := cryptod.FromMLDsa87(privateKeyMLDSA87)
 	publicKeyRaw := cryptod.FromMLDsa87Pub(privateKeyMLDSA87.Public().(*cryptod.PublicKey))
 
-	fmt.Println("privateKey", privateKey)
-	fmt.Println("Length of privateKey:", len(privateKey))
+	// Convert the MLDsa87 private key to a hex string
+	/* hexPrivateKey, err := cryptod.MLDsa87ToHex(privateKeyMLDSA87) // Pass the original key object here
+	if err != nil {
+		fmt.Printf("Error converting MLDsa87 key to hex: %v\n", err)
+	} else {
+		fmt.Printf("MLDsa87 private key in hex: %s\n", hexPrivateKey)
+	} */
 
-	fmt.Println("publicKeyRaw", publicKeyRaw)
-	fmt.Println("Length of publicKeyRaw:", len(publicKeyRaw))
+	// fmt.Println("privateKey", privateKey)
+	// fmt.Println("Length of privateKey:", len(privateKey))
+
+	// fmt.Println("publicKeyRaw", publicKeyRaw)
+	// fmt.Println("Length of publicKeyRaw:", len(publicKeyRaw))
 
 	publicKey := validatorpk.PubKey{
 		Raw:  publicKeyRaw,
 		Type: validatorpk.Types.MLDsa87, // Ensure this type exists in your implementation
 	}
 
-	fmt.Println("publicKey", publicKey.String())
+	//fmt.Println("publicKey", publicKey.String())
 
-	fmt.Println("test1", "test 1")
+	//fmt.Println("test1", "test 1")
 
 	valKeystore := valkeystore.NewDefaultFileRawKeystore(path.Join(getValKeystoreDir(cfg.Node), "validator"))
 
-	fmt.Println("test2", "test 2")
+	//fmt.Println("test2", "test 2")
 
 	// if valKeystore != nil {
 	// 	fmt.Println("valKeystore", valKeystore)
@@ -162,14 +170,14 @@ func validatorKeyCreate(ctx *cli.Context) error {
 
 	err = valKeystore.Add(publicKey, privateKey, password)
 
-	fmt.Println("test3", "test 3")
+	//fmt.Println("test3", "test 3")
 
 	if err != nil {
-		fmt.Println("test5", "test 5")
+		//fmt.Println("test5", "test 5")
 		utils.Fatalf("Failed to create account: %v", err)
 	}
 
-	fmt.Println("test4", "test 4")
+	//fmt.Println("test4", "test 4")
 
 	// fmt.Printf("\nYour new key was generated\n\n")
 
@@ -179,7 +187,7 @@ func validatorKeyCreate(ctx *cli.Context) error {
 		utils.Fatalf("Failed to decrypt the account: %v", err)
 	}
 
-	fmt.Println("test2", "test 2")
+	//fmt.Println("test2", "test 2")
 
 	fmt.Printf("\nYour new key was generated\n\n")
 	fmt.Printf("Public key:                  %s\n", publicKey.String())

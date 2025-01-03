@@ -2,7 +2,6 @@ package encryption
 
 import (
 	"bytes"
-	"crypto/ecdsa"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -11,7 +10,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/cryptod"
 
 	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/validatorpk"
 )
@@ -44,6 +43,7 @@ func New(scryptN int, scryptP int) *Keystore {
 	}
 }
 
+/*
 func (ks Keystore) ReadKey(wantPubkey validatorpk.PubKey, filename, auth string) (*PrivateKey, error) {
 	// Load the key from the keystore and decrypt its contents
 	keyjson, err := ioutil.ReadFile(filename)
@@ -60,6 +60,60 @@ func (ks Keystore) ReadKey(wantPubkey validatorpk.PubKey, filename, auth string)
 	if bytes.Compare(wantPubkey.Raw, gotPubkey) != 0 {
 		return nil, fmt.Errorf("key content mismatch: have public key %X, want %X", gotPubkey, wantPubkey.Raw)
 	}
+	return key, nil
+}
+*/
+/*
+func (ks Keystore) ReadKey(wantPubkey validatorpk.PubKey, filename, auth string) (*PrivateKey, error) {
+	// Load the key from the keystore and decrypt its contents
+	keyjson, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	key, err := DecryptKey(keyjson, auth)
+	if err != nil {
+		return nil, err
+	}
+
+	// Verify the key type and match the public key
+	if key.Type != validatorpk.Types.MLDsa87 {
+		return nil, fmt.Errorf("unsupported key type: %v", key.Type)
+	}
+
+	// Verify the public key for MLDsa87
+	keyMLDsa87 := key.Decoded.(*cryptod.PrivateKey)
+	gotPubkey := cryptod.FromMLDsa87Pub(keyMLDsa87.Public().(*cryptod.PublicKey))
+	if bytes.Compare(wantPubkey.Raw, gotPubkey) != 0 {
+		return nil, fmt.Errorf("key content mismatch: have public key %X, want %X", gotPubkey, wantPubkey.Raw)
+	}
+
+	return key, nil
+}
+*/
+
+func (ks Keystore) ReadKey(wantPubkey validatorpk.PubKey, filename, auth string) (*PrivateKey, error) {
+	// Load the key from the keystore and decrypt its contents
+	keyjson, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	key, err := DecryptKey(keyjson, auth)
+	if err != nil {
+		return nil, err
+	}
+
+	// Verify the key type and match the public key
+	if key.Type != validatorpk.Types.MLDsa87 {
+		return nil, fmt.Errorf("unsupported key type: %v", key.Type)
+	}
+
+	// Verify the public key for MLDsa87
+	keyMLDsa87 := key.Decoded.(*cryptod.PrivateKey)
+	gotPubkey := cryptod.FromMLDsa87Pub(keyMLDsa87.Public().(*cryptod.PublicKey))
+	if !bytes.Equal(wantPubkey.Raw, gotPubkey) { // Use bytes.Equal instead of bytes.Compare
+		return nil, fmt.Errorf("key content mismatch: have public key %X, want %X", gotPubkey, wantPubkey.Raw)
+	}
+
 	return key, nil
 }
 
@@ -134,7 +188,7 @@ func (ks Keystore) EncryptKey(pubkey validatorpk.PubKey, key []byte, auth string
 }
 
 // DecryptKey decrypts a key from a json blob, returning the private key itself.
-func DecryptKey(keyjson []byte, auth string) (*PrivateKey, error) {
+/* func DecryptKey(keyjson []byte, auth string) (*PrivateKey, error) {
 	// Parse the json into a simple map to fetch the key version
 	m := make(map[string]interface{})
 	if err := json.Unmarshal(keyjson, &m); err != nil {
@@ -167,12 +221,55 @@ func DecryptKey(keyjson []byte, auth string) (*PrivateKey, error) {
 		Bytes:   keyBytes,
 		Decoded: decoded,
 	}, nil
+} */
+
+func DecryptKey(keyjson []byte, auth string) (*PrivateKey, error) {
+	// Parse the JSON into a simple map to fetch the key version
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(keyjson, &m); err != nil {
+		return nil, err
+	}
+
+	k := new(EncryptedKeyJSON)
+	if err := json.Unmarshal(keyjson, k); err != nil {
+		return nil, err
+	}
+
+	if k.Type != validatorpk.Types.MLDsa87 {
+		return nil, ErrNotSupportedType
+	}
+
+	// Decrypt MLDsa87 key
+	keyBytes, err := decryptKey_MLDsa87(k, auth)
+	if err != nil {
+		return nil, err
+	}
+
+	decoded, err := cryptod.ToMLDsa87(keyBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	return &PrivateKey{
+		Type:    k.Type,
+		Bytes:   keyBytes,
+		Decoded: decoded,
+	}, nil
 }
 
-func decryptKey_secp256k1(keyProtected *EncryptedKeyJSON, auth string) (keyBytes []byte, err error) {
+func decryptKey_MLDsa87(k *EncryptedKeyJSON, auth string) ([]byte, error) {
+	keyBytes, err := keystore.DecryptDataV3(k.Crypto, auth)
+	if err != nil {
+		return nil, fmt.Errorf("failed to decrypt MLDsa87 key: %v", err)
+	}
+	return keyBytes, nil
+}
+
+/* func decryptKey_secp256k1(keyProtected *EncryptedKeyJSON, auth string) (keyBytes []byte, err error) {
 	plainText, err := keystore.DecryptDataV3(keyProtected.Crypto, auth)
 	if err != nil {
 		return nil, err
 	}
 	return plainText, err
 }
+*/
