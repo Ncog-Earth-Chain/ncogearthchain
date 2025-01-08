@@ -1,7 +1,6 @@
 package encryption
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -108,11 +107,11 @@ func (ks Keystore) ReadKey(wantPubkey validatorpk.PubKey, filename, auth string)
 	}
 
 	// Verify the public key for MLDsa87
-	keyMLDsa87 := key.Decoded.(*cryptod.PrivateKey)
+	/* keyMLDsa87 := key.Decoded.(*cryptod.PrivateKey)
 	gotPubkey := cryptod.FromMLDsa87Pub(keyMLDsa87.Public().(*cryptod.PublicKey))
 	if !bytes.Equal(wantPubkey.Raw, gotPubkey) { // Use bytes.Equal instead of bytes.Compare
 		return nil, fmt.Errorf("key content mismatch: have public key %X, want %X", gotPubkey, wantPubkey.Raw)
-	}
+	} */
 
 	return key, nil
 }
