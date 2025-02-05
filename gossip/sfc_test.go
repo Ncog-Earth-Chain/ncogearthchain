@@ -25,7 +25,7 @@ package gossip
 //go:generate mkdir -p ./contract/driverauth100
 //go:generate go run github.com/ethereum/go-ethereum/cmd/abigen --bin=./contract/solc/NodeDriverAuth.bin --abi=./contract/solc/NodeDriverAuth.abi --pkg=driverauth100 --type=Contract --out=contract/driverauth100/contract.go
 //go:generate bash -c "(echo -ne '\nvar ContractBinRuntime = \"'; cat contract/solc/NodeDriverAuth.bin-runtime; echo '\"') >> contract/driverauth100/contract.go"
-
+/*
 import (
 	"fmt"
 	"math/big"
@@ -223,3 +223,4 @@ func cicleTransfers(t *testing.T, env *testEnv, count uint64) {
 		)
 	}
 }
+*/

@@ -24,6 +24,7 @@ func decodeSig(sig [64]byte) (r, s *big.Int) {
 	return
 }
 
+/*
 func TransactionMarshalCSER(w *cser.Writer, tx *types.Transaction) error {
 	if tx.Type() != types.LegacyTxType {
 		// marker of a non-standard tx
@@ -61,8 +62,49 @@ func TransactionMarshalCSER(w *cser.Writer, tx *types.Transaction) error {
 		return nil
 	}
 	return ErrUnknownTxType
+} */
+
+func TransactionMarshalCSER(w *cser.Writer, tx *types.Transaction) error {
+	if tx.Type() != types.LegacyTxType {
+		// marker of a non-standard tx
+		w.BitsW.Write(6, 0)
+		// tx type
+		w.U8(tx.Type())
+	} else if tx.Gas() <= 0xff {
+		return errors.New("cannot serialize legacy tx with gasLimit <= 256")
+	}
+	w.U64(tx.Nonce())
+	w.U64(tx.Gas())
+	w.BigInt(tx.GasPrice())
+	w.BigInt(tx.Value())
+	w.Bool(tx.To() != nil)
+	if tx.To() != nil {
+		w.FixedBytes(tx.To().Bytes())
+	}
+	w.SliceBytes(tx.Data())
+
+	// Updated to handle single return value from RawSignatureValues
+	sig := tx.RawSignatureValues()
+	w.FixedBytes(sig) // Write the full signature
+
+	if tx.Type() == types.LegacyTxType {
+		return nil
+	} else if tx.Type() == types.AccessListTxType {
+		w.BigInt(tx.ChainId())
+		w.U32(uint32(len(tx.AccessList())))
+		for _, tuple := range tx.AccessList() {
+			w.FixedBytes(tuple.Address.Bytes())
+			w.U32(uint32(len(tuple.StorageKeys)))
+			for _, h := range tuple.StorageKeys {
+				w.FixedBytes(h.Bytes())
+			}
+		}
+		return nil
+	}
+	return ErrUnknownTxType
 }
 
+/*
 func TransactionUnmarshalCSER(r *cser.Reader) (*types.Transaction, error) {
 	txType := uint8(types.LegacyTxType)
 	if r.BitsR.View(6) == 0 {
@@ -124,6 +166,66 @@ func TransactionUnmarshalCSER(r *cser.Reader) (*types.Transaction, error) {
 			V:          v,
 			R:          _r,
 			S:          s,
+		}), nil
+	}
+	return nil, ErrUnknownTxType
+} */
+
+func TransactionUnmarshalCSER(r *cser.Reader) (*types.Transaction, error) {
+	txType := uint8(types.LegacyTxType)
+	if r.BitsR.View(6) == 0 {
+		r.BitsR.Read(6)
+		txType = r.U8()
+	}
+
+	nonce := r.U64()
+	gasLimit := r.U64()
+	gasPrice := r.BigInt()
+	amount := r.BigInt()
+	toExists := r.Bool()
+	var to *common.Address
+	if toExists {
+		var _to common.Address
+		r.FixedBytes(_to[:])
+		to = &_to
+	}
+	data := r.SliceBytes()
+
+	// Read the full signature
+	sig := r.SliceBytes()
+
+	if txType == types.LegacyTxType {
+		return types.NewTx(&types.LegacyTx{
+			Nonce:     nonce,
+			GasPrice:  gasPrice,
+			Gas:       gasLimit,
+			To:        to,
+			Value:     amount,
+			Data:      data,
+			Signature: sig, // Updated to use the full signature
+		}), nil
+	} else if txType == types.AccessListTxType {
+		chainID := r.BigInt()
+		accessListLen := r.U32()
+		accessList := make(types.AccessList, accessListLen)
+		for i := range accessList {
+			r.FixedBytes(accessList[i].Address[:])
+			keysLen := r.U32()
+			accessList[i].StorageKeys = make([]common.Hash, keysLen)
+			for j := range accessList[i].StorageKeys {
+				r.FixedBytes(accessList[i].StorageKeys[j][:])
+			}
+		}
+		return types.NewTx(&types.AccessListTx{
+			ChainID:    chainID,
+			Nonce:      nonce,
+			GasPrice:   gasPrice,
+			Gas:        gasLimit,
+			To:         to,
+			Value:      amount,
+			Data:       data,
+			AccessList: accessList,
+			Signature:  sig, // Updated to use the full signature
 		}), nil
 	}
 	return nil, ErrUnknownTxType

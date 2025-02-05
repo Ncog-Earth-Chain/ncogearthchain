@@ -1,16 +1,14 @@
 package makegenesis
 
 import (
-	"crypto/ecdsa"
 	"math/big"
-	"math/rand"
 	"time"
 
 	"github.com/Ncog-Earth-Chain/forest-base/hash"
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/cryptod"
 
 	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
 	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/validatorpk"
@@ -30,10 +28,24 @@ var (
 )
 
 // FakeKey gets n-th fake private key.
-func FakeKey(n int) *ecdsa.PrivateKey {
+/* func FakeKey(n int) *ecdsa.PrivateKey {
+
+	fmt.Println("FakeKey(n int)", "testing")
+
 	reader := rand.New(rand.NewSource(int64(n)))
 
 	key, err := ecdsa.GenerateKey(crypto.S256(), reader)
+	if err != nil {
+		panic(err)
+	}
+
+	return key
+} */
+
+// FakeKey gets n-th fake private key.
+func FakeKey(n int) *cryptod.PrivateKey {
+
+	key, err := cryptod.GenerateMLDsa87Key()
 	if err != nil {
 		panic(err)
 	}
@@ -122,7 +134,7 @@ func FakeGenesisStore(num int, balance, stake *big.Int) *genesisstore.Store {
 	return genStore
 }
 
-func GetFakeValidators(num int) gpos.Validators {
+/* func GetFakeValidators(num int) gpos.Validators {
 	validators := make(gpos.Validators, 0, num)
 
 	for i := 1; i <= num; i++ {
@@ -136,6 +148,32 @@ func GetFakeValidators(num int) gpos.Validators {
 			PubKey: validatorpk.PubKey{
 				Raw:  pubkeyraw,
 				Type: validatorpk.Types.Secp256k1,
+			},
+			CreationTime:     FakeGenesisTime,
+			CreationEpoch:    0,
+			DeactivatedTime:  0,
+			DeactivatedEpoch: 0,
+			Status:           0,
+		})
+	}
+
+	return validators
+} */
+
+func GetFakeValidators(num int) gpos.Validators {
+	validators := make(gpos.Validators, 0, num)
+
+	for i := 1; i <= num; i++ {
+		key := FakeKey(i)
+		addr := cryptod.PubkeyToAddress(*key.Public().(*cryptod.PublicKey))
+		pubkeyraw := cryptod.FromMLDsa87Pub(key.Public().(*cryptod.PublicKey))
+		validatorID := idx.ValidatorID(i)
+		validators = append(validators, gpos.Validator{
+			ID:      validatorID,
+			Address: addr,
+			PubKey: validatorpk.PubKey{
+				Raw:  pubkeyraw,
+				Type: validatorpk.Types.MLDsa87,
 			},
 			CreationTime:     FakeGenesisTime,
 			CreationEpoch:    0,

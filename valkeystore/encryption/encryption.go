@@ -150,7 +150,7 @@ func (ks Keystore) StoreKey(filename string, pubkey validatorpk.PubKey, key []by
 func (ks Keystore) EncryptKey(pubkey validatorpk.PubKey, key []byte, auth string) ([]byte, error) {
 	// Validate inputs
 	if len(pubkey.Raw) == 0 || pubkey.Type == 0 {
-		return nil, fmt.Errorf("invalid public key: %+v", pubkey)
+		return nil, fmt.Errorf("invalid public key_test: %+v", pubkey)
 	}
 	if len(key) == 0 {
 		return nil, fmt.Errorf("invalid key: key is empty")

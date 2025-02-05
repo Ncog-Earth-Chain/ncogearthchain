@@ -1,7 +1,6 @@
 package launcher
 
 import (
-	"crypto/ecdsa"
 	"fmt"
 	"strconv"
 	"strings"
@@ -10,6 +9,7 @@ import (
 	cli "gopkg.in/urfave/cli.v1"
 
 	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration/makegenesis"
+	"github.com/ethereum/go-ethereum/cryptod"
 )
 
 // FakeNetFlag enables special testnet, where validators are automatically created
@@ -18,7 +18,20 @@ var FakeNetFlag = cli.StringFlag{
 	Usage: "'n/N' - sets coinbase as fake n-th key from genesis of N validators.",
 }
 
-func getFakeValidatorKey(ctx *cli.Context) *ecdsa.PrivateKey {
+/* func getFakeValidatorKey(ctx *cli.Context) *ecdsa.PrivateKey {
+	num, _, err := parseFakeGen(ctx.GlobalString(FakeNetFlag.Name))
+	if err != nil {
+		return nil
+	}
+
+	if num == 0 {
+		return nil
+	}
+
+	return makegenesis.FakeKey(int(num))
+} */
+
+func getFakeValidatorKey(ctx *cli.Context) *cryptod.PrivateKey {
 	num, _, err := parseFakeGen(ctx.GlobalString(FakeNetFlag.Name))
 	if err != nil {
 		return nil

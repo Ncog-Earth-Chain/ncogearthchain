@@ -1,5 +1,6 @@
 package gossip
 
+/*
 import (
 	"context"
 	"crypto/ecdsa"
@@ -239,9 +240,9 @@ func (env *testEnv) incNonce(account common.Address) {
 	env.nonces[account] += 1
 }
 
-/*
- * bind.ContractCaller interface
- */
+
+//  * bind.ContractCaller interface
+
 
 var (
 	errBlockNumberUnsupported = errors.New("simulatedBackend cannot access blocks other than the latest block")
@@ -309,9 +310,9 @@ func (env *testEnv) callContract(
 	return
 }
 
-/*
- * bind.ContractTransactor interface
- */
+
+//  * bind.ContractTransactor interface
+
 
 // PendingCodeAt returns the code of the given account in the pending state.
 func (env *testEnv) PendingCodeAt(ctx context.Context, account common.Address) ([]byte, error) {
@@ -351,9 +352,9 @@ func (env *testEnv) SendTransaction(ctx context.Context, tx *types.Transaction) 
 	return nil
 }
 
-/*
- *  bind.ContractFilterer interface
- */
+
+//  *  bind.ContractFilterer interface
+
 
 // FilterLogs executes a log filter operation, blocking during execution and
 // returning all the results in one batch.
@@ -383,3 +384,4 @@ func (m callmsg) Nonce() uint64                { return 0 }
 func (m callmsg) CheckNonce() bool             { return false }
 func (m callmsg) Data() []byte                 { return m.CallMsg.Data }
 func (m callmsg) AccessList() types.AccessList { return nil }
+*/

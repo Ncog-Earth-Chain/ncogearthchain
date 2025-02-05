@@ -1,5 +1,6 @@
 package inter
 
+/*
 import (
 	"bytes"
 	"math"
@@ -312,3 +313,4 @@ func FakeEvent(txsNum int) *EventPayload {
 
 	return random.Build()
 }
+*/

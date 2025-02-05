@@ -117,22 +117,22 @@ var tomlSettings = toml.Config{
 }
 
 type config struct {
-	Node        node.Config
+	Node                node.Config
 	Ncogearthchain      gossip.Config
 	NcogearthchainStore gossip.StoreConfig
-	Forest      abft.Config
-	ForestStore abft.StoreConfig
-	VectorClock vecmt.IndexConfig
+	Forest              abft.Config
+	ForestStore         abft.StoreConfig
+	VectorClock         vecmt.IndexConfig
 }
 
 func (c *config) AppConfigs() integration.Configs {
 	return integration.Configs{
-		Ncogearthchain:         c.Ncogearthchain,
-		NcogearthchainStore:    c.NcogearthchainStore,
-		Forest:         c.Forest,
-		ForestStore:    c.ForestStore,
-		VectorClock:    c.VectorClock,
-		AllowedGenesis: AllowedNcogearthchainGenesisHashes,
+		Ncogearthchain:      c.Ncogearthchain,
+		NcogearthchainStore: c.NcogearthchainStore,
+		Forest:              c.Forest,
+		ForestStore:         c.ForestStore,
+		VectorClock:         c.VectorClock,
+		AllowedGenesis:      AllowedNcogearthchainGenesisHashes,
 	}
 }
 
@@ -209,7 +209,7 @@ func setBootnodes(ctx *cli.Context, urls []string, cfg *node.Config) {
 		if url != "" {
 			node, err := enode.Parse(enode.ValidSchemes, url)
 			if err != nil {
-				log.Error("Bootstrap URL invalid", "enode", url, "err", err)
+				log.Error("Bootstrap URL invalid test3", "enode", url, "err", err)
 				continue
 			}
 			cfg.P2P.BootstrapNodesV5 = append(cfg.P2P.BootstrapNodesV5, node)
@@ -341,12 +341,12 @@ func mayMakeAllConfigs(ctx *cli.Context) (*config, error) {
 	// Defaults (low priority)
 	cacheRatio := cacheScaler(ctx)
 	cfg := config{
-		Node:        defaultNodeConfig(),
+		Node:                defaultNodeConfig(),
 		Ncogearthchain:      gossip.DefaultConfig(cacheRatio),
 		NcogearthchainStore: gossip.DefaultStoreConfig(cacheRatio),
-		Forest:      abft.DefaultConfig(),
-		ForestStore: abft.DefaultStoreConfig(cacheRatio),
-		VectorClock: vecmt.DefaultConfig(cacheRatio),
+		Forest:              abft.DefaultConfig(),
+		ForestStore:         abft.DefaultStoreConfig(cacheRatio),
+		VectorClock:         vecmt.DefaultConfig(cacheRatio),
 	}
 
 	if ctx.GlobalIsSet(FakeNetFlag.Name) {
@@ -404,6 +404,7 @@ func defaultNodeConfig() node.Config {
 
 // dumpConfig is the dumpconfig command.
 func dumpConfig(ctx *cli.Context) error {
+	// fmt.Println("dumpConfigtest", "dumpConfigtest")
 	cfg := makeAllConfigs(ctx)
 	comment := ""
 

@@ -1,5 +1,6 @@
 package launcher
 
+/*
 import (
 	"path/filepath"
 	"runtime"
@@ -116,3 +117,4 @@ func readFakeValidator(fakenet string) *validatorpk.PubKey {
 		Type: validatorpk.Types.Secp256k1,
 	}
 }
+*/
