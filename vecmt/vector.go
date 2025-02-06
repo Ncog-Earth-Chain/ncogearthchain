@@ -6,7 +6,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 	"github.com/Ncog-Earth-Chain/forest-base/vecfc"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
 )
 
 /*

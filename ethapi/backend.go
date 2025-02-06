@@ -34,9 +34,9 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/sfcapi"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/sfcapi"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
 )
 
 // PeerProgress is synchronization status of a peer

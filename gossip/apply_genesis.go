@@ -10,14 +10,14 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/blockproc"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/evmstore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/sfcapi"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/drivertype"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/blockproc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/evmstore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/sfcapi"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/drivertype"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis"
 )
 
 // ApplyGenesis writes initial state.

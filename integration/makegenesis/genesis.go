@@ -10,17 +10,17 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/cryptod"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/validatorpk"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/driver"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/driverauth"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/evmwriter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/gpos"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/netinit"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/sfc"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesisstore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/validatorpk"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/driver"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/driverauth"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/evmwriter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/gpos"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/netinit"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/sfc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesisstore"
 )
 
 var (

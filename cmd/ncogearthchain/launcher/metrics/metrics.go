@@ -9,7 +9,7 @@ import (
 	"github.com/ethereum/go-ethereum/metrics"
 	cli "gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/metrics/prometheus"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/metrics/prometheus"
 )
 
 var PrometheusEndpointFlag = cli.StringFlag{

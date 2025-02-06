@@ -10,9 +10,9 @@ import (
 	"github.com/ethereum/go-ethereum/cryptod"
 	"gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/validatorpk"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/valkeystore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/valkeystore/encryption"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/validatorpk"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/valkeystore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/valkeystore/encryption"
 )
 
 var (

@@ -23,13 +23,13 @@ import (
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration/makegenesis"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/gpos"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/gsignercache"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration/makegenesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/gpos"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/gsignercache"
 )
 
 const (

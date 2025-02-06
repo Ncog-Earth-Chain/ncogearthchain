@@ -24,9 +24,9 @@ import (
 	"github.com/ethereum/go-ethereum/core/state"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis"
 )
 
 // ApplyGenesis writes or updates the genesis block in db.

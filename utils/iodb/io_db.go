@@ -6,7 +6,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/common/bigendian"
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/ioread"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/ioread"
 )
 
 func Write(writer io.Writer, db kvdb.Iteratee) error {

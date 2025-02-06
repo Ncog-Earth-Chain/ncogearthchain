@@ -18,7 +18,7 @@ import (
 	"github.com/ethereum/go-ethereum/p2p"
 	"github.com/ethereum/go-ethereum/rlp"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
 )
 
 var (

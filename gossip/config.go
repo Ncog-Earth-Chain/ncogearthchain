@@ -14,13 +14,13 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/utils/cachescale"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/eventcheck/heavycheck"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/blockproc/verwatcher"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/emitter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/evmstore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/filters"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/gasprice"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/eventcheck/heavycheck"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/blockproc/verwatcher"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/emitter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/evmstore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/filters"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/gasprice"
 )
 
 const nominalSize uint = 1

@@ -13,7 +13,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/cmd/cmdtest"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/cmd/cmdtest"
 )
 
 func tmpdir(t *testing.T) string {

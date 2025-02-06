@@ -28,8 +28,8 @@ import (
 	"github.com/ethereum/go-ethereum/ethdb"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
 )
 
 // BlockGen creates blocks for testing.

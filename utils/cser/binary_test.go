@@ -9,7 +9,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/fast"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/fast"
 )
 
 func TestEmpty(t *testing.T) {

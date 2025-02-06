@@ -47,10 +47,10 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/tyler-smith/go-bip39"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/gsignercache"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/gsignercache"
 )
 
 var (

@@ -7,7 +7,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/pos"
 	"github.com/ethereum/go-ethereum/rlp"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/drivertype"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/drivertype"
 )
 
 type ValidatorProfiles map[idx.ValidatorID]drivertype.Validator

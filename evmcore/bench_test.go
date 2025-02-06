@@ -33,7 +33,7 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration/makegenesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration/makegenesis"
 )
 
 func BenchmarkInsertChain_empty_memdb(b *testing.B) {

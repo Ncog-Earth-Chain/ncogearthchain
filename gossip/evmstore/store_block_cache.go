@@ -4,7 +4,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
 )
 
 func (s *Store) GetCachedEvmBlock(n idx.Block) *evmcore.EvmBlock {

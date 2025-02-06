@@ -8,9 +8,9 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/concurrent"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/migration"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/concurrent"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/migration"
 )
 
 func isEmptyDB(db kvdb.Iteratee) bool {

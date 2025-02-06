@@ -22,15 +22,15 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/pkg/errors"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ethapi"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/blockproc"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/sfcapi"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/drivertype"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/topicsdb"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/tracing"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ethapi"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/blockproc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/sfcapi"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/drivertype"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/topicsdb"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/tracing"
 )
 
 // EthAPIBackend implements ethapi.Backend.

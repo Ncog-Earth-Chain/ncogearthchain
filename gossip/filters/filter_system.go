@@ -32,7 +32,7 @@ import (
 	"github.com/ethereum/go-ethereum/log"
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
 )
 
 // Type determines the kind of filter and is used to put the filter in to

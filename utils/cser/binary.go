@@ -1,8 +1,8 @@
 package cser
 
 import (
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/bits"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/fast"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/bits"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/fast"
 )
 
 func MarshalBinaryAdapter(marshalCser func(*Writer) error) ([]byte, error) {

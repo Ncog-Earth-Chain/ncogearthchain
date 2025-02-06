@@ -6,7 +6,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/emitter/ancestor"
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/piecefunc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/piecefunc"
 )
 
 var (

@@ -5,8 +5,8 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/pos"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/blockproc"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/blockproc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
 )
 
 const sKey = "s"

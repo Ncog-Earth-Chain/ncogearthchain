@@ -7,9 +7,9 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/gpos"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/gpos"
 )
 
 type Genesis struct {

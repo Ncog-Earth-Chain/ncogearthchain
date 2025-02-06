@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration/makegenesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration/makegenesis"
 
 	"github.com/ethereum/go-ethereum/params"
 )

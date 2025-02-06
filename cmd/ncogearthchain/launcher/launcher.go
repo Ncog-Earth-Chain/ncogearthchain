@@ -20,15 +20,15 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/cmd/ncogearthchain/launcher/metrics"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/cmd/ncogearthchain/launcher/tracing"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/debug"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/flags"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/errlock"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/valkeystore"
-	_ "github.com/Ncog-Earth-Chain/go-ncogearthchain/version"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/cmd/ncogearthchain/launcher/metrics"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/cmd/ncogearthchain/launcher/tracing"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/debug"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/flags"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/errlock"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/valkeystore"
+	_ "github.com/Ncog-Earth-Chain/ncogearthchain/version"
 )
 
 const (

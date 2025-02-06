@@ -4,9 +4,9 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/hash"
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/concurrent"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/concurrent"
 )
 
 type GPOBackend struct {

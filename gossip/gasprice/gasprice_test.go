@@ -7,7 +7,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 	"github.com/stretchr/testify/require"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
 )
 
 type TestBackend struct {

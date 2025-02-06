@@ -34,8 +34,8 @@ import (
 	"github.com/ethereum/go-ethereum/trie"
 	cli "gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/evmstore/evmpruner"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/evmstore/evmpruner"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration"
 )
 
 var (

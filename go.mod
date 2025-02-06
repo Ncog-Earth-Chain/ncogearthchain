@@ -1,4 +1,4 @@
-module github.com/Ncog-Earth-Chain/go-ncogearthchain
+module github.com/Ncog-Earth-Chain/ncogearthchain
 
 go 1.22.0
 
@@ -57,7 +57,6 @@ require (
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/golang/snappy v0.0.3-0.20201103224600-674baa8c7fc3 // indirect
-	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/uuid v1.1.5 // indirect
 	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/graph-gophers/graphql-go v0.0.0-20201113091052-beb923fada29 // indirect

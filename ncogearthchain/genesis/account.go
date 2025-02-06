@@ -9,7 +9,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
 )
 
 type (

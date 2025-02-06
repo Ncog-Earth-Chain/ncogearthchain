@@ -3,7 +3,7 @@ package eventcheck
 import (
 	base "github.com/Ncog-Earth-Chain/forest-base/eventcheck"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/eventcheck/epochcheck"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/eventcheck/epochcheck"
 )
 
 var (

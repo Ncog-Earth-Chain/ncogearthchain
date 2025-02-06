@@ -11,8 +11,8 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration/makegenesis"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/validatorpk"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration/makegenesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/validatorpk"
 )
 
 func TestFakeNetFlag_NonValidator(t *testing.T) {

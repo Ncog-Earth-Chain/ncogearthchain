@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/rlp"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/cser"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/cser"
 )
 
 var (

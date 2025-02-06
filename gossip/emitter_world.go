@@ -8,11 +8,11 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/wgmutex"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/valkeystore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/vecmt"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/wgmutex"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/valkeystore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/vecmt"
 )
 
 // emitterWorld implements emitter.World interface

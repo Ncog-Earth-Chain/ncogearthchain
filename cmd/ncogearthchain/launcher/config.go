@@ -24,15 +24,15 @@ import (
 	"github.com/naoina/toml"
 	"gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/gasprice"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration/makegenesis"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesisstore"
-	futils "github.com/Ncog-Earth-Chain/go-ncogearthchain/utils"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/vecmt"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/gasprice"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration/makegenesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesisstore"
+	futils "github.com/Ncog-Earth-Chain/ncogearthchain/utils"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/vecmt"
 )
 
 var (

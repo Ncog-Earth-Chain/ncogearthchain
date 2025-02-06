@@ -5,8 +5,8 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
 )
 
 func (s *Store) applyRawEvmItems(db kvdb.Iteratee) (err error) {

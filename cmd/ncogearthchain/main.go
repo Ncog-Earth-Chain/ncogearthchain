@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/cmd/ncogearthchain/launcher"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/cmd/ncogearthchain/launcher"
 )
 
 func main() {

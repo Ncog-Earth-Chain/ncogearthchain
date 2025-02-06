@@ -8,7 +8,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 	"github.com/Ncog-Earth-Chain/forest-base/inter/pos"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
 )
 
 // medianTimeIndex is a handy index for the MedianTime() func

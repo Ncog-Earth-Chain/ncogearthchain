@@ -7,7 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/cser"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/cser"
 )
 
 var ErrUnknownTxType = errors.New("unknown tx type")

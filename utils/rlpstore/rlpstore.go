@@ -2,7 +2,7 @@ package rlpstore
 
 import (
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/logger"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/logger"
 	"github.com/ethereum/go-ethereum/rlp"
 )
 

@@ -34,7 +34,7 @@ import (
 	"github.com/ethereum/go-ethereum/metrics"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/gsignercache"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/gsignercache"
 )
 
 const (

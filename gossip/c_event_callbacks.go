@@ -10,12 +10,12 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/dag"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/eventcheck"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/eventcheck/epochcheck"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/blockproc"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/emitter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/concurrent"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/eventcheck"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/eventcheck/epochcheck"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/blockproc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/emitter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/concurrent"
 )
 
 var (

@@ -5,7 +5,7 @@ import (
 
 	base "github.com/Ncog-Earth-Chain/forest-base/eventcheck/parentscheck"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
 )
 
 var (

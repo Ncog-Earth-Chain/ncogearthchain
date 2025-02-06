@@ -6,9 +6,9 @@ import (
 
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/emitter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration/makegenesis"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/validatorpk"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/emitter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration/makegenesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/validatorpk"
 )
 
 var validatorIDFlag = cli.UintFlag{

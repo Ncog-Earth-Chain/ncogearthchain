@@ -6,8 +6,8 @@ import (
 	"os"
 	"path"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/validatorpk"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/valkeystore/encryption"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/validatorpk"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/valkeystore/encryption"
 	"github.com/ethereum/go-ethereum/common"
 )
 

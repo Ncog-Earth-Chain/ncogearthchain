@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/logger"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/logger"
 )
 
 func equalStorageReceipts(t *testing.T, expect, got types.Receipts) {

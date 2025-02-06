@@ -24,12 +24,12 @@ import (
 	"github.com/status-im/keycard-go/hexutils"
 	"gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/emitter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/iodb"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/ioread"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/emitter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/iodb"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/ioread"
 )
 
 type restrictedEvmBatch struct {

@@ -20,8 +20,8 @@ import (
 	"github.com/status-im/keycard-go/hexutils"
 	"gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration"
 )
 
 var (

@@ -22,7 +22,7 @@ import (
 	"github.com/ethereum/go-ethereum/p2p/enode"
 	"github.com/ethereum/go-ethereum/rlp"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
 )
 
 // enrEntry is the ENR entry which advertises `eth` protocol on the discovery.

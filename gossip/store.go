@@ -12,10 +12,10 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/utils/wlru"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/evmstore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/sfcapi"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/logger"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/rlpstore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/evmstore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/sfcapi"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/logger"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/rlpstore"
 )
 
 // Store is a node persistent storage working over physical key-value database.

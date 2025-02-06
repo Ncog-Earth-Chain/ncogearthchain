@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/validatorpk"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/validatorpk"
 )
 
 type encryptedAccountKeyJSONV3 struct {

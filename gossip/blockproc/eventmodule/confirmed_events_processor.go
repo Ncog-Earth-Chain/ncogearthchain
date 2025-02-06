@@ -1,8 +1,8 @@
 package eventmodule
 
 import (
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/blockproc"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/blockproc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
 )
 
 type ValidatorEventsModule struct{}

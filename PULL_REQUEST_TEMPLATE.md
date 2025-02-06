@@ -1,4 +1,4 @@
-Please check if what you want to add to `go-ncogearthchain` list meets [quality standards](https://github.com/Ncog-Earth-Chain/go-ncogearthchain/blob/master/CONTRIBUTING.md#quality-standard) before sending pull request.
+Please check if what you want to add to `go-ncogearthchain` list meets [quality standards](https://github.com/Ncog-Earth-Chain/ncogearthchain/blob/master/CONTRIBUTING.md#quality-standard) before sending pull request.
 
 **Please provide package links to:**
 
@@ -14,4 +14,4 @@ Please check if what you want to add to `go-ncogearthchain` list meets [quality 
 - [ ] I have added godoc link to the repo and to my pull request.
 - [ ] I have added coverage service link to the repo and to my pull request.
 - [ ] I have added goreportcard link to the repo and to my pull request.
-- [ ] I have read [Contribution guidelines](https://github.com/Ncog-Earth-Chain/go-ncogearthchain/blob/master/CONTRIBUTING.md#contribution-guidelines), [maintainers note](https://github.com/Ncog-Earth-Chain/go-ncogearthchain/blob/master/CONTRIBUTING.md#maintainers) and [Quality standard](https://github.com/Ncog-Earth-Chain/go-ncogearthchain/blob/master/CONTRIBUTING.md#quality-standard).
+- [ ] I have read [Contribution guidelines](https://github.com/Ncog-Earth-Chain/ncogearthchain/blob/master/CONTRIBUTING.md#contribution-guidelines), [maintainers note](https://github.com/Ncog-Earth-Chain/ncogearthchain/blob/master/CONTRIBUTING.md#maintainers) and [Quality standard](https://github.com/Ncog-Earth-Chain/ncogearthchain/blob/master/CONTRIBUTING.md#quality-standard).

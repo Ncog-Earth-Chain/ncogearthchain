@@ -14,7 +14,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb/skiperrors"
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb/table"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/logger"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/logger"
 )
 
 var (

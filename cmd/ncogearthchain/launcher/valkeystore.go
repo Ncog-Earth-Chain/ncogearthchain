@@ -14,8 +14,8 @@ import (
 	"github.com/ethereum/go-ethereum/node"
 	cli "gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/validatorpk"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/valkeystore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/validatorpk"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/valkeystore"
 )
 
 // addFakeValidatorKey adds a fake validator key to the keystore.

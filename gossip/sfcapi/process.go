@@ -7,9 +7,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/sfc"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/topicsdb"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/sfc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/topicsdb"
 )
 
 func ApplyGenesis(s *Store, index *topicsdb.Index) {

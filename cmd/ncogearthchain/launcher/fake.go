@@ -8,7 +8,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 	cli "gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration/makegenesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration/makegenesis"
 	"github.com/ethereum/go-ethereum/cryptod"
 )
 

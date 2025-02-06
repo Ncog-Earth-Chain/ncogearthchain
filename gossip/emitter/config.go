@@ -7,8 +7,8 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/validatorpk"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/validatorpk"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
 )
 
 // EmitIntervals is the configuration of emit intervals.

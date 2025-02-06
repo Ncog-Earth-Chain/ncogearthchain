@@ -6,7 +6,7 @@ ncogearthchain:
 	GIT_COMMIT=`git rev-list -1 HEAD 2>/dev/null || echo ""` && \
 	GIT_DATE=`git log -1 --date=short --pretty=format:%ct 2>/dev/null || echo ""` && \
 	go build \
-	    -ldflags "-s -w -X github.com/Ncog-Earth-Chain/go-ncogearthchain/cmd/ncogearthchain/launcher.gitCommit=$${GIT_COMMIT} -X github.com/Ncog-Earth-Chain/go-ncogearthchain/cmd/ncogearthchain/launcher.gitDate=$${GIT_DATE}" \
+	    -ldflags "-s -w -X github.com/Ncog-Earth-Chain/ncogearthchain/cmd/ncogearthchain/launcher.gitCommit=$${GIT_COMMIT} -X github.com/Ncog-Earth-Chain/ncogearthchain/cmd/ncogearthchain/launcher.gitDate=$${GIT_DATE}" \
 	    -o build/ncogearthchain \
 	    ./cmd/ncogearthchain
 

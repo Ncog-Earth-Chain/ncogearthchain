@@ -15,12 +15,12 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/integration/makegenesis"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesisstore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/vecmt"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/integration/makegenesis"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesisstore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/vecmt"
 )
 
 func BenchmarkFlushDBs(b *testing.B) {

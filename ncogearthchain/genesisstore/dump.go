@@ -10,8 +10,8 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/hash"
 	"github.com/status-im/keycard-go/hexutils"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/iodb"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/ioread"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/iodb"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/ioread"
 )
 
 var (

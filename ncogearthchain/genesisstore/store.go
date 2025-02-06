@@ -5,8 +5,8 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb/memorydb"
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb/table"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/logger"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/rlpstore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/logger"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/rlpstore"
 )
 
 // Store is a node persistent storage working over physical key-value database.

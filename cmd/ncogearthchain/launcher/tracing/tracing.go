@@ -7,7 +7,7 @@ import (
 	"github.com/uber/jaeger-lib/metrics"
 	"gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/tracing"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/tracing"
 )
 
 var EnableFlag = cli.BoolFlag{

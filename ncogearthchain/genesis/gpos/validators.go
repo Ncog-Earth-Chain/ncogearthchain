@@ -1,11 +1,11 @@
 package gpos
 
 import (
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter/validatorpk"
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/validatorpk"
 )
 
 type (

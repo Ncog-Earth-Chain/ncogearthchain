@@ -25,8 +25,8 @@ import (
 	"github.com/ethereum/go-ethereum/cmd/utils"
 	cli "gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/debug"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/flags"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/debug"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/flags"
 )
 
 // AppHelpFlagGroups is the application flags, grouped by functionality.

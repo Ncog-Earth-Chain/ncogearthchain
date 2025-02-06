@@ -91,27 +91,27 @@ go test ./...
 
 If everything goes well, it should output something along these lines:
 ```
-ok  	github.com/Ncog-Earth-Chain/go-ncogearthchain/app	0.033s
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/cmd/cmdtest	[no test files]
-ok  	github.com/Ncog-Earth-Chain/go-ncogearthchain/cmd/ncogearthchain	13.890s
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/cmd/ncogearthchain/metrics	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/cmd/ncogearthchain/tracing	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/crypto	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/debug	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/ethapi	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/eventcheck	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/eventcheck/basiccheck	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/eventcheck/gaspowercheck	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/eventcheck/heavycheck	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/eventcheck/parentscheck	[no test files]
-ok  	github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore	6.322s
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/emitter	[no test files]
-ok  	github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/filters	1.250s
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/gasprice	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/occuredtxs	[no test files]
-?   	github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/piecefunc	[no test files]
-ok  	github.com/Ncog-Earth-Chain/go-ncogearthchain/integration	21.640s
+ok  	github.com/Ncog-Earth-Chain/ncogearthchain/app	0.033s
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/cmd/cmdtest	[no test files]
+ok  	github.com/Ncog-Earth-Chain/ncogearthchain/cmd/ncogearthchain	13.890s
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/cmd/ncogearthchain/metrics	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/cmd/ncogearthchain/tracing	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/crypto	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/debug	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/ethapi	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/eventcheck	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/eventcheck/basiccheck	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/eventcheck/gaspowercheck	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/eventcheck/heavycheck	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/eventcheck/parentscheck	[no test files]
+ok  	github.com/Ncog-Earth-Chain/ncogearthchain/evmcore	6.322s
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/gossip	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/gossip/emitter	[no test files]
+ok  	github.com/Ncog-Earth-Chain/ncogearthchain/gossip/filters	1.250s
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/gossip/gasprice	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/gossip/occuredtxs	[no test files]
+?   	github.com/Ncog-Earth-Chain/ncogearthchain/gossip/piecefunc	[no test files]
+ok  	github.com/Ncog-Earth-Chain/ncogearthchain/integration	21.640s
 ```
 
 Also it is tested with [fuzzing](./FUZZING.md).

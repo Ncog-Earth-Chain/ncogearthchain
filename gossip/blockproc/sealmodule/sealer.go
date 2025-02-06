@@ -7,7 +7,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 	"github.com/Ncog-Earth-Chain/forest-base/inter/pos"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/blockproc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/blockproc"
 )
 
 type NcogearthchainEpochsSealerModule struct{}

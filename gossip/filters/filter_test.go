@@ -32,8 +32,8 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/topicsdb"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/adapters/ethdb2kvdb"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/topicsdb"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/adapters/ethdb2kvdb"
 )
 
 func testConfig() Config {

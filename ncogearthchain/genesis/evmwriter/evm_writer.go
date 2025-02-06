@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/vm"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/driver"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/driver"
 )
 
 var (

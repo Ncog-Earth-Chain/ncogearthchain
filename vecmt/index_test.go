@@ -9,7 +9,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/pos"
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb/memorydb"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
 )
 
 var (

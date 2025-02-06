@@ -12,7 +12,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/utils/cachescale"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip"
 )
 
 func DBProducer(chaindataDir string, scale cachescale.Func) kvdb.IterableDBProducer {

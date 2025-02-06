@@ -7,8 +7,8 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/emitter/doublesign"
 	"github.com/Ncog-Earth-Chain/forest-base/hash"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/errlock"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/errlock"
 )
 
 type syncStatus struct {

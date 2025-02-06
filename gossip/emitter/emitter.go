@@ -17,13 +17,13 @@ import (
 	"github.com/ethereum/go-ethereum/trie"
 	lru "github.com/hashicorp/golang-lru"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/emitter/originatedtxs"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/logger"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/tracing"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/piecefunc"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/rate"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/emitter/originatedtxs"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/logger"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/tracing"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/piecefunc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/rate"
 )
 
 const (

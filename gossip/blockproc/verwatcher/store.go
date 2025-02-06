@@ -3,7 +3,7 @@ package verwatcher
 import (
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/logger"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/logger"
 )
 
 // Store is a node persistent storage working over physical key-value database.

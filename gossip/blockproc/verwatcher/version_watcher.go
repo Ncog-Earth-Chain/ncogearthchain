@@ -8,11 +8,11 @@ import (
 
 	"github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/logger"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/driver"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/driver/driverpos"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/errlock"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/version"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/logger"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/driver"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/driver/driverpos"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/errlock"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/version"
 )
 
 type VerWarcher struct {

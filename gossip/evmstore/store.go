@@ -17,10 +17,10 @@ import (
 	"github.com/ethereum/go-ethereum/trie"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/logger"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/topicsdb"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/adapters/kvdb2ethdb"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/rlpstore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/logger"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/topicsdb"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/adapters/kvdb2ethdb"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/rlpstore"
 )
 
 const nominalSize uint = 1

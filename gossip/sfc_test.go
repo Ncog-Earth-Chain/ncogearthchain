@@ -35,17 +35,17 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/contract/driver100"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/contract/driverauth100"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/contract/netinit100"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/contract/sfc100"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/logger"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/driver"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/driverauth"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/evmwriter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/netinit"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesis/sfc"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/contract/driver100"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/contract/driverauth100"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/contract/netinit100"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/contract/sfc100"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/logger"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/driver"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/driverauth"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/evmwriter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/netinit"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/sfc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils"
 )
 
 func TestSFC(t *testing.T) {

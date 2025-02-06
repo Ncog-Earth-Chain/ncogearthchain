@@ -8,7 +8,7 @@ import (
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/sfcapi"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/sfcapi"
 )
 
 // PublicSfcAPI provides an API to access SFC related information.

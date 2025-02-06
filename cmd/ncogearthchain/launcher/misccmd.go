@@ -10,7 +10,7 @@ import (
 	"github.com/ethereum/go-ethereum/params"
 	"gopkg.in/urfave/cli.v1"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip"
 )
 
 var (

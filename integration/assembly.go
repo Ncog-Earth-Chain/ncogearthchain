@@ -15,11 +15,11 @@ import (
 	"github.com/ethereum/go-ethereum/cryptod"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain/genesisstore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/adapters/vecmt2dagidx"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/vecmt"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesisstore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/adapters/vecmt2dagidx"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/vecmt"
 )
 
 // GenesisMismatchError is raised when trying to overwrite an existing

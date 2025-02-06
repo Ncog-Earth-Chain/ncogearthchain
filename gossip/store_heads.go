@@ -7,7 +7,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/hash"
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils/concurrent"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/concurrent"
 )
 
 type sortedHead []byte

@@ -11,10 +11,10 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/params"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/eventcheck/epochcheck"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/eventcheck/gaspowercheck"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/utils"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/eventcheck/epochcheck"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/eventcheck/gaspowercheck"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/utils"
 )
 
 const (

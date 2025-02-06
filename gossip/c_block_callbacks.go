@@ -17,14 +17,14 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/log"
 
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/evmcore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/blockproc"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/blockproc/verwatcher"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/emitter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/evmstore"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/gossip/sfcapi"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/inter"
-	"github.com/Ncog-Earth-Chain/go-ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/evmcore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/blockproc"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/blockproc/verwatcher"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/emitter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/evmstore"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip/sfcapi"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
 )
 
 type ExtendedTxPosition struct {
