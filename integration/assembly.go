@@ -30,7 +30,13 @@ type GenesisMismatchError struct {
 
 // Error implements error interface.
 func (e *GenesisMismatchError) Error() string {
-	return fmt.Sprintf("database contains incompatible gossip genesis (have %s, new %s)", e.Stored.String(), e.New.String())
+	// return fmt.Sprintf("database contains incompatible gossip genesis (have %s, new %s)", e.Stored.String(), e.New.String())
+
+	return fmt.Sprintf(
+		"database contains incompatible gossip genesis (have %s [%d bytes], new %s [%d bytes])",
+		e.Stored.String(), len(e.Stored.Bytes()),
+		e.New.String(), len(e.New.Bytes()),
+	)
 }
 
 type Configs struct {
@@ -157,6 +163,10 @@ func makeEngine(rawProducer kvdb.IterableDBProducer, inputGenesis InputGenesis, 
 			return nil, nil, nil, nil, nil, gossip.BlockProc{}, fmt.Errorf("failed to close existing databases: %v", err)
 		}
 
+		//fmt.Println("rawProducer_testing", rawProducer)
+		//fmt.Println("inputGenesis_testing", inputGenesis)
+		//fmt.Println("cfg_testing", cfg)
+
 		err = applyGenesis(rawProducer, inputGenesis, cfg)
 		if err != nil {
 			return nil, nil, nil, nil, nil, gossip.BlockProc{}, fmt.Errorf("failed to apply genesis state: %v", err)
@@ -192,7 +202,7 @@ func makeEngine(rawProducer kvdb.IterableDBProducer, inputGenesis InputGenesis, 
 
 	engine, vecClock, blockProc, err := rawMakeEngine(gdb, cdb, genesisStore.GetGenesis(), cfg, false)
 	if err != nil {
-		err = fmt.Errorf("failed to make engine: %v", err)
+		err = fmt.Errorf("failed to make engine1: %v", err)
 		return nil, nil, nil, nil, nil, gossip.BlockProc{}, err
 	}
 
@@ -220,7 +230,7 @@ func MakeEngine(rawProducer kvdb.IterableDBProducer, genesis InputGenesis, cfg C
 		if len(existingDBs) == 0 {
 			dropAllDBs(rawProducer)
 		}
-		utils.Fatalf("Failed to make engine: %v", err)
+		utils.Fatalf("Failed to make engine2: %v", err)
 	}
 
 	if len(existingDBs) == 0 {

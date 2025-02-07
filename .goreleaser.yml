@@ -3,7 +3,7 @@ before:
     - make clean proto vendor
 builds:
   - main: ./cmd/ncogearthchain/main.go
-    binary: go-ncogearthchain
+    binary: ncogearthchain
     ldflags:
       - -linkmode external -extldflags -static -s -w
       - -X main.gitCommit={{ .ShortCommit }}
@@ -48,10 +48,10 @@ nfpm:
     - rpm
 
   empty_folders:
-    - /var/log/go-ncogearthchain
+    - /var/log/ncogearthchain
 
   files:
-    "scripts/daemon/go-ncogearthchain.service": "/lib/systemd/system/go-ncogearthchain.service"
+    "scripts/daemon/ncogearthchain.service": "/lib/systemd/system/ncogearthchain.service"
 
   # scripts:
   #   preinstall: "scripts/preinstall.bash"

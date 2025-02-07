@@ -1,4 +1,4 @@
-Please check if what you want to add to `go-ncogearthchain` list meets [quality standards](https://github.com/Ncog-Earth-Chain/ncogearthchain/blob/master/CONTRIBUTING.md#quality-standard) before sending pull request.
+Please check if what you want to add to `ncogearthchain` list meets [quality standards](https://github.com/Ncog-Earth-Chain/ncogearthchain/blob/master/CONTRIBUTING.md#quality-standard) before sending pull request.
 
 **Please provide package links to:**
 

@@ -36,7 +36,7 @@ func TestFakeNetFlag_NonValidator(t *testing.T) {
 	cli.Expect(`
 Welcome to the Forest JavaScript console!
 
-instance: go-ncogearthchain/v{{version}}/{{goos}}-{{goarch}}/{{gover}}
+instance: ncogearthchain/v{{version}}/{{goos}}-{{goarch}}/{{gover}}
 coinbase: {{.Coinbase}}
 at block: 1 ({{niltime}})
  datadir: {{.Datadir}}
@@ -80,7 +80,7 @@ func TestFakeNetFlag_Validator(t *testing.T) {
 	cli.Expect(`
 Welcome to the Forest JavaScript console!
 
-instance: go-ncogearthchain/v{{version}}/{{goos}}-{{goarch}}/{{gover}}
+instance: ncogearthchain/v{{version}}/{{goos}}-{{goarch}}/{{gover}}
 coinbase: {{.Coinbase}}
 at block: 1 ({{niltime}})
  datadir: {{.Datadir}}

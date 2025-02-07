@@ -41,7 +41,7 @@ func TestConsoleWelcome(t *testing.T) {
 	cli.Expect(`
 Welcome to the Forest JavaScript console!
 
-instance: go-ncogearthchain/v{{version}}/{{goos}}-{{goarch}}/{{gover}}
+instance: ncogearthchain/v{{version}}/{{goos}}-{{goarch}}/{{gover}}
 coinbase: {{.Coinbase}}
 at block: 1 ({{niltime}})
  datadir: {{.Datadir}}
@@ -123,7 +123,7 @@ func testAttachWelcome(t *testing.T, cli *testcli, endpoint, apis string) {
 	attach.Expect(`
 Welcome to the Forest JavaScript console!
 
-instance: go-ncogearthchain/v{{version}}/{{goos}}-{{goarch}}/{{gover}}
+instance: ncogearthchain/v{{version}}/{{goos}}-{{goarch}}/{{gover}}
 coinbase: {{coinbase}}
 at block: 1 ({{niltime}}){{if ipc}}
  datadir: {{datadir}}{{end}}

@@ -33,7 +33,7 @@ import (
 
 const (
 	// clientIdentifier to advertise over the network.
-	clientIdentifier = "go-ncogearthchain"
+	clientIdentifier = "ncogearthchain"
 )
 
 var (
@@ -41,7 +41,7 @@ var (
 	gitCommit = ""
 	gitDate   = ""
 	// The app that holds all commands and flags.
-	app = flags.NewApp(gitCommit, gitDate, "the go-ncogearthchain command line interface")
+	app = flags.NewApp(gitCommit, gitDate, "the ncogearthchain command line interface")
 
 	nodeFlags           []cli.Flag
 	testFlags           []cli.Flag
