@@ -17,6 +17,7 @@
 package evmcore
 
 import (
+	"fmt"
 	"math"
 	"math/big"
 
@@ -103,5 +104,6 @@ func MustApplyGenesis(g ncogearthchain.Genesis, statedb *state.StateDB, maxMemor
 	if err != nil {
 		log.Crit("ApplyGenesis", "err", err)
 	}
+	fmt.Println("blocktesing", block)
 	return block
 }

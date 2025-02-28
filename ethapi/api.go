@@ -408,7 +408,6 @@ func (s *PrivateAccountAPI) SendTransaction(ctx context.Context, args SendTxArgs
 		s.nonceLock.LockAddr(args.From)
 		defer s.nonceLock.UnlockAddr(args.From)
 	}
-	// fmt.Println("testing", "testing")
 	signed, err := s.signTransaction(ctx, &args, passwd)
 	if err != nil {
 		log.Warn("Failed transaction send attempt", "from", args.From, "to", args.To, "value", args.Value.ToInt(), "err", err)
@@ -505,6 +504,7 @@ func (s *PrivateAccountAPI) EcRecover(ctx context.Context, data, sig hexutil.Byt
 // SignAndSendTransaction was renamed to SendTransaction. This method is deprecated
 // and will be removed in the future. It primary goal is to give clients time to update.
 func (s *PrivateAccountAPI) SignAndSendTransaction(ctx context.Context, args SendTxArgs, passwd string) (common.Hash, error) {
+	fmt.Println("SignAndSendTransaction", "test1")
 	return s.SendTransaction(ctx, args, passwd)
 }
 
@@ -1901,7 +1901,7 @@ func SubmitTransaction(ctx context.Context, b Backend, tx *types.Transaction) (c
 		// Ensure only eip155 signed transactions are submitted if EIP155Required is set.
 		return common.Hash{}, errors.New("only replay-protected (EIP-155) transactions allowed over RPC")
 	}
-	fmt.Println("testing7", "testing7")
+	fmt.Println("SubmitTransaction", "test1")
 	if err := b.SendTx(ctx, tx); err != nil {
 		return common.Hash{}, err
 	} // Print a log with full tx details for manual investigations and interventions
@@ -1929,7 +1929,7 @@ func SubmitTransaction(ctx context.Context, b Backend, tx *types.Transaction) (c
 // SendTransaction creates a transaction for the given argument, sign it and submit it to the
 // transaction pool.
 func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args SendTxArgs) (common.Hash, error) {
-	fmt.Println("testing2", args)
+	fmt.Println("testing2 args.From", args.From)
 	// Look up the wallet containing the requested signer
 	account := accounts.Account{Address: args.From}
 
@@ -1969,9 +1969,9 @@ func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args Sen
 		return common.Hash{}, err
 	}
 
-	fmt.Println("signed testing", signed)
-	fmt.Println("ctx testing", ctx)
-	fmt.Println("s.b testing", s.b)
+	// fmt.Println("signed testing", signed)
+	// fmt.Println("ctx testing", ctx)
+	// fmt.Println("s.b testing", s.b)
 
 	return SubmitTransaction(ctx, s.b, signed)
 }

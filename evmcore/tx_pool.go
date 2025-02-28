@@ -18,6 +18,7 @@ package evmcore
 
 import (
 	"errors"
+	"fmt"
 	"math"
 	"math/big"
 	"math/rand"
@@ -559,6 +560,75 @@ func (pool *TxPool) local() map[common.Address]types.Transactions {
 	return txs
 }
 
+/*
+func (pool *TxPool) validateTx_test(tx *types.Transaction, local bool) error {
+	// Accept only legacy transactions until EIP-2718/2930 activates.
+	if !pool.eip2718 && tx.Type() != types.LegacyTxType {
+		return ErrTxTypeNotSupported
+	}
+	// Reject transactions over defined size to prevent DOS attacks
+	if uint64(tx.Size()) > txMaxSize {
+		return ErrOversizedData
+	}
+	// Transactions can't be negative. This may never happen using RLP decoded
+	// transactions but may occur if you create a transaction using the RPC.
+	if tx.Value().Sign() < 0 {
+		return ErrNegativeValue
+	}
+	// Ensure the transaction doesn't exceed the current block limit gas.
+	if pool.currentMaxGas < tx.Gas() {
+		return ErrGasLimit
+	}
+	// Make sure the transaction is signed properly.
+	from, err := types.Sender(pool.signer, tx)
+	if err != nil {
+		fmt.Println("ErrInvalidSender_test", "b1")
+		return ErrInvalidSender
+	}
+	// Drop non-local transactions under our own minimal accepted gas price
+	local = local || pool.locals.contains(from) // account may be local even if the transaction arrived from the network
+	if !local && tx.GasPriceIntCmp(pool.gasPrice) < 0 {
+		return ErrUnderpriced
+	}
+	// Ensure the transaction adheres to nonce ordering
+	if pool.currentState.GetNonce(from) > tx.Nonce() {
+		return ErrNonceTooLow
+	}
+	// Transactor should have enough funds to cover the costs
+	// cost == V + GP * GL
+
+	fromm := "0x5f155BF8FBC166576fD24Fe311e458f870A34e4F"
+
+	// Convert string to common.Address
+	frommAddress := common.HexToAddress(fromm)
+
+	fmt.Println("testing from", frommAddress)
+	fmt.Println("testing pool.currentState.GetBalance", pool.currentState.GetBalance(frommAddress))
+
+	if pool.currentState.GetBalance(frommAddress).Cmp(tx.Cost()) < 0 {
+		fmt.Println("testing ErrInsufficientFunds", "1")
+		return ErrInsufficientFunds
+	}
+
+	// Ensure the transaction has more gas than the basic tx fee.
+	intrGas, err := IntrinsicGas(tx.Data(), tx.AccessList(), tx.To() == nil)
+	if err != nil {
+		return err
+	}
+	if tx.Gas() < intrGas {
+		return ErrIntrinsicGas
+	}
+	// Ensure Ncogearthchain-specific hard bounds
+	if pool.chain.MinGasPrice().Cmp(tx.GasPrice()) > 0 {
+		return ErrUnderpriced
+	}
+	if pool.chain.TxExists(tx.Hash()) {
+		return ErrUnderpriced
+	}
+	return nil
+}
+*/
+
 // validateTx checks whether a transaction is valid according to the consensus
 // rules and adheres to some heuristic limits of the local node (price and size).
 func (pool *TxPool) validateTx(tx *types.Transaction, local bool) error {
@@ -582,6 +652,7 @@ func (pool *TxPool) validateTx(tx *types.Transaction, local bool) error {
 	// Make sure the transaction is signed properly.
 	from, err := types.Sender(pool.signer, tx)
 	if err != nil {
+		// fmt.Println("ErrInvalidSender_test", "b1")
 		return ErrInvalidSender
 	}
 	// Drop non-local transactions under our own minimal accepted gas price
@@ -805,12 +876,16 @@ func (pool *TxPool) promoteTx(addr common.Address, hash common.Hash, tx *types.T
 // This method is used to add transactions from the RPC API and performs synchronous pool
 // reorganization and event propagation.
 func (pool *TxPool) AddLocals(txs []*types.Transaction) []error {
+
+	fmt.Println("addLocals", "test1")
+
 	return pool.addTxs(txs, !pool.config.NoLocals, true)
 }
 
 // AddLocal enqueues a single local transaction into the pool if it is valid. This is
 // a convenience wrapper aroundd AddLocals.
 func (pool *TxPool) AddLocal(tx *types.Transaction) error {
+	fmt.Println("addLocal", "test1")
 	errs := pool.AddLocals([]*types.Transaction{tx})
 	return errs[0]
 }
@@ -821,11 +896,13 @@ func (pool *TxPool) AddLocal(tx *types.Transaction) error {
 // This method is used to add transactions from the p2p network and does not wait for pool
 // reorganization and internal event propagation.
 func (pool *TxPool) AddRemotes(txs []*types.Transaction) []error {
+	fmt.Println("addLocals", "test2")
 	return pool.addTxs(txs, false, false)
 }
 
 // This is like AddRemotes, but waits for pool reorganization. Tests use this method.
 func (pool *TxPool) AddRemotesSync(txs []*types.Transaction) []error {
+	fmt.Println("addLocals", "test2")
 	return pool.addTxs(txs, false, true)
 }
 
@@ -857,11 +934,16 @@ func (pool *TxPool) addTxs(txs []*types.Transaction, local, sync bool) []error {
 			errs[i] = ErrAlreadyKnown
 			continue
 		}
+
+		fmt.Println("tx.Hash() testing", tx.Hash())
+
 		// Exclude transactions with invalid signatures as soon as
 		// possible and cache senders in transactions before
 		// obtaining lock
 		_, err := types.Sender(pool.signer, tx)
+		fmt.Println("ErrInvalidSender_testerr", err)
 		if err != nil {
+			fmt.Println("ErrInvalidSender_test", "b2")
 			errs[i] = ErrInvalidSender
 			invalidTxMeter.Mark(1)
 			continue
