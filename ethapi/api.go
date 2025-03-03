@@ -408,7 +408,6 @@ func (s *PrivateAccountAPI) SendTransaction(ctx context.Context, args SendTxArgs
 		s.nonceLock.LockAddr(args.From)
 		defer s.nonceLock.UnlockAddr(args.From)
 	}
-	// fmt.Println("testing", "testing")
 	signed, err := s.signTransaction(ctx, &args, passwd)
 	if err != nil {
 		log.Warn("Failed transaction send attempt", "from", args.From, "to", args.To, "value", args.Value.ToInt(), "err", err)
@@ -1863,8 +1862,6 @@ func (args *SendTxArgs) toTransaction() *types.Transaction {
 		input = *args.Data
 	}
 
-	fmt.Println("input testing", input)
-
 	var data types.TxData
 	if args.AccessList == nil {
 		data = &types.LegacyTx{
@@ -1901,16 +1898,12 @@ func SubmitTransaction(ctx context.Context, b Backend, tx *types.Transaction) (c
 		// Ensure only eip155 signed transactions are submitted if EIP155Required is set.
 		return common.Hash{}, errors.New("only replay-protected (EIP-155) transactions allowed over RPC")
 	}
-	fmt.Println("testing7", "testing7")
+
 	if err := b.SendTx(ctx, tx); err != nil {
 		return common.Hash{}, err
 	} // Print a log with full tx details for manual investigations and interventions
 
-	fmt.Println("testing7", "testing7.1")
-
 	signer := types.MakeSigner(b.ChainConfig(), b.CurrentBlock().Number)
-
-	fmt.Println("testing6", "testing6")
 
 	from, err := types.Sender(signer, tx)
 	if err != nil {
@@ -1929,7 +1922,6 @@ func SubmitTransaction(ctx context.Context, b Backend, tx *types.Transaction) (c
 // SendTransaction creates a transaction for the given argument, sign it and submit it to the
 // transaction pool.
 func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args SendTxArgs) (common.Hash, error) {
-	fmt.Println("testing2", args)
 	// Look up the wallet containing the requested signer
 	account := accounts.Account{Address: args.From}
 
@@ -1938,8 +1930,6 @@ func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args Sen
 		return common.Hash{}, err
 	}
 
-	fmt.Println("wallet testing", wallet)
-
 	if args.Nonce == nil {
 		// Hold the addresse's mutex around signing to prevent concurrent assignment of
 		// the same nonce to multiple accounts.
@@ -1947,31 +1937,18 @@ func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args Sen
 		defer s.nonceLock.UnlockAddr(args.From)
 	}
 
-	fmt.Println(" args.Nonce testing", args.Nonce)
-
 	// Set some sanity defaults and terminate on failure
 	if err := args.setDefaults(ctx, s.b); err != nil {
-
-		fmt.Println("args.setDefaults common.Hash", common.Hash{})
-
 		return common.Hash{}, err
 	}
 
-	fmt.Println("testing3", "testing3")
-
 	// Assemble the transaction and sign with the wallet
 	tx := args.toTransaction()
-
-	fmt.Println("args.toTransaction()", tx)
 
 	signed, err := wallet.SignTx(account, tx, s.b.ChainConfig().ChainID)
 	if err != nil {
 		return common.Hash{}, err
 	}
-
-	fmt.Println("signed testing", signed)
-	fmt.Println("ctx testing", ctx)
-	fmt.Println("s.b testing", s.b)
 
 	return SubmitTransaction(ctx, s.b, signed)
 }

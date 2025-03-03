@@ -129,12 +129,12 @@ func applyGenesis(rawProducer kvdb.DBProducer, inputGenesis InputGenesis, cfg Co
 	defer gdb.Close()
 	defer cdb.Close()
 	defer genesisStore.Close()
-	log.Info("Decoding genesis file")
+	//log.Info("Decoding genesis file")
 	err := inputGenesis.Read(genesisStore)
 	if err != nil {
 		return err
 	}
-	log.Info("Applying genesis state")
+	// log.Info("Applying genesis state")
 	networkID := genesisStore.GetRules().NetworkID
 	if want, ok := cfg.AllowedGenesis[networkID]; ok && want != inputGenesis.Hash {
 		return fmt.Errorf("genesis hash is not allowed for the network %d: want %s, got %s", networkID, want.String(), inputGenesis.Hash.String())
