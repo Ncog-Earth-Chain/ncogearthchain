@@ -223,10 +223,10 @@ func (em *Emitter) getSortedTxs() *types.TransactionsByPriceAndNonce {
 }
 
 func (em *Emitter) EmitEvent() *inter.EventPayload {
-	if em.config.Validator.ID == 0 {
-		// short circuit if not a validator
-		return nil
-	}
+	// if em.config.Validator.ID == 0 {
+	// 	// short circuit if not a validator
+	// 	return nil
+	// }
 	sortedTxs := em.getSortedTxs()
 
 	if em.world.IsBusy() {

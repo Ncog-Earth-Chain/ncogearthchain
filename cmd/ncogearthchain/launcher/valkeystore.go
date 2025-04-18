@@ -78,9 +78,14 @@ func unlockValidatorKey(ctx *cli.Context, pubKey validatorpk.PubKey, valKeystore
 	for trials := 0; trials < 3; trials++ {
 		prompt := fmt.Sprintf("Unlocking validator key %s | Attempt %d/%d", pubKey.String(), trials+1, 3)
 		password := getPassPhrase(prompt, false, 0, makeValidatorPasswordList(ctx))
-		err = valKeystore.Unlock(pubKey, password)
+		publicKeyFile := validatorpk.PubKey{
+			Type: pubKey.Type,
+			Raw:  pubKey.Bytes()[:32],
+		}
+
+		err = valKeystore.Unlock(publicKeyFile, password)
 		if err == nil {
-			log.Info("Unlocked validator key", "pubkey", pubKey.String())
+			log.Info("Unlocked validator key", "pubkey", publicKeyFile)
 			return nil
 		}
 	}
