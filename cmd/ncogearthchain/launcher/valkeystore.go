@@ -97,7 +97,7 @@ func unlockValidatorKey(ctx *cli.Context, pubKey validatorpk.PubKey, valKeystore
 		password := getPassPhrase(prompt, false, 0, makeValidatorPasswordList(ctx))
 		publicKeyFile := validatorpk.PubKey{
 			Type: pubKey.Type,
-			Raw:  pubKey.Bytes()[:32],
+			Raw:  pubKey.Bytes()[1:33],
 		}
 
 		err = valKeystore.Unlock(publicKeyFile, password)
