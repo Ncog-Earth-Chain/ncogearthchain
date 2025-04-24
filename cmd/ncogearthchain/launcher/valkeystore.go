@@ -74,7 +74,7 @@ func makeValidatorPasswordList(ctx *cli.Context) []string {
 
 // unlockValidatorKey unlocks the validator key in the keystore.
 // old 18-apr
-/* func unlockValidatorKey(ctx *cli.Context, pubKey validatorpk.PubKey, valKeystore valkeystore.KeystoreI) error {
+func unlockValidatorKey(ctx *cli.Context, pubKey validatorpk.PubKey, valKeystore valkeystore.KeystoreI) error {
 	var err error
 	for trials := 0; trials < 3; trials++ {
 		prompt := fmt.Sprintf("Unlocking validator key %s | Attempt %d/%d", pubKey.String(), trials+1, 3)
@@ -87,10 +87,10 @@ func makeValidatorPasswordList(ctx *cli.Context) []string {
 	}
 	// All trials expended to unlock account, bail out
 	return err
-} */
+}
 
 // unlockValidatorKey unlocks the validator key in the keystore.
-func unlockValidatorKey(ctx *cli.Context, pubKey validatorpk.PubKey, valKeystore valkeystore.KeystoreI) error {
+/* func unlockValidatorKey(ctx *cli.Context, pubKey validatorpk.PubKey, valKeystore valkeystore.KeystoreI) error {
 	var err error
 	for trials := 0; trials < 3; trials++ {
 		prompt := fmt.Sprintf("Unlocking validator key %s | Attempt %d/%d", pubKey.String(), trials+1, 3)
@@ -108,4 +108,4 @@ func unlockValidatorKey(ctx *cli.Context, pubKey validatorpk.PubKey, valKeystore
 	}
 	// All trials expended to unlock account, bail out
 	return err
-}
+} */

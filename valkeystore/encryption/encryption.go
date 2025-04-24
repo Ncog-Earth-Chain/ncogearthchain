@@ -234,6 +234,9 @@ func DecryptKey(keyjson []byte, auth string) (*PrivateKey, error) {
 		return nil, err
 	}
 
+	// fmt.Println("k.Type", k.Type)
+	// fmt.Println("validatorpk.Types.MLDsa87", validatorpk.Types.MLDsa87)
+
 	if k.Type != validatorpk.Types.MLDsa87 {
 		return nil, ErrNotSupportedType
 	}

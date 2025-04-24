@@ -19,7 +19,7 @@ var Types = struct {
 	MLDsa87   uint8
 }{
 	Secp256k1: 0xc0,
-	MLDsa87:   0xc1,
+	MLDsa87:   0xc0,
 }
 
 func (pk *PubKey) Empty() bool {

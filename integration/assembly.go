@@ -7,6 +7,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/abft"
 	"github.com/Ncog-Earth-Chain/forest-base/hash"
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
+	"github.com/Ncog-Earth-Chain/forest-base/inter/pos"
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb"
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb/flushable"
 	"github.com/ethereum/go-ethereum/accounts"
@@ -17,6 +18,7 @@ import (
 
 	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip"
 	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
+	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/gpos"
 	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesisstore"
 	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/adapters/vecmt2dagidx"
 	"github.com/Ncog-Earth-Chain/ncogearthchain/vecmt"
@@ -80,13 +82,56 @@ func getStores(producer kvdb.FlushableDBProducer, cfg Configs) (*gossip.Store, *
 	return gdb, cdb, genesisStore
 }
 
+/* func rawApplyGenesis(gdb *gossip.Store, cdb *abft.Store, g ncogearthchain.Genesis, cfg Configs) error {
+	_, _, _, err := rawMakeEngine(gdb, cdb, g, cfg, true)
+	return err
+} */
+
 func rawApplyGenesis(gdb *gossip.Store, cdb *abft.Store, g ncogearthchain.Genesis, cfg Configs) error {
+	if gdb == nil {
+		return fmt.Errorf("gossip store (gdb) is nil")
+	}
+	if cdb == nil {
+		return fmt.Errorf("consensus store (cdb) is nil")
+	}
 	_, _, _, err := rawMakeEngine(gdb, cdb, g, cfg, true)
 	return err
 }
 
+/*
+func ConvertGposToPosValidators(gv gpos.Validators) *pos.Validators {
+	builder := pos.NewBuilder()
+
+	defaultWeight := pos.Weight(1) // or assign dynamically if needed
+
+	for _, val := range gv {
+		builder.Set(val.ID, defaultWeight)
+	}
+
+	return builder.Build()
+} */
+
+func ConvertGposToPosValidators(gv gpos.Validators) *pos.Validators {
+	builder := pos.NewBuilder()
+
+	for _, val := range gv {
+		// Use status directly, or normalize it
+		weight := pos.Weight(val.Status) // If Status is uint64
+		// log.Info("Validator Weight", "id", val.ID, "weight", weight)
+		if weight == 0 {
+			weight = 555111512 // Ensure non-zero weight
+		}
+		builder.Set(val.ID, weight)
+	}
+
+	return builder.Build()
+}
+
 func rawMakeEngine(gdb *gossip.Store, cdb *abft.Store, g ncogearthchain.Genesis, cfg Configs, applyGenesis bool) (*abft.Forest, *vecmt.Index, gossip.BlockProc, error) {
 	blockProc := gossip.DefaultBlockProc(g)
+
+	gpoch := g.FirstEpoch
+	gvalidators := g.Validators
 
 	if applyGenesis {
 		_, err := gdb.ApplyGenesis(blockProc, g)
@@ -94,10 +139,13 @@ func rawMakeEngine(gdb *gossip.Store, cdb *abft.Store, g ncogearthchain.Genesis,
 			return nil, nil, blockProc, fmt.Errorf("failed to write Gossip genesis state: %v", err)
 		}
 
+		fmt.Printf("Validators in GetValidators = %+v\n", ConvertGposToPosValidators(gvalidators))
+
 		err = cdb.ApplyGenesis(&abft.Genesis{
-			Epoch:      gdb.GetEpoch(),
-			Validators: gdb.GetValidators(),
+			Epoch:      gpoch,
+			Validators: ConvertGposToPosValidators(gvalidators),
 		})
+
 		if err != nil {
 			return nil, nil, blockProc, fmt.Errorf("failed to write Forest genesis state: %v", err)
 		}
@@ -190,21 +238,28 @@ func makeEngine(rawProducer kvdb.IterableDBProducer, inputGenesis InputGenesis, 
 	// compare genesis with the input
 	if !emptyStart {
 		genesisHash := gdb.GetGenesisHash()
+
+		fmt.Println("genesisHash", genesisHash.String())
 		if genesisHash == nil {
 			err = errors.New("malformed chainstore: genesis hash is not written")
 			return nil, nil, nil, nil, nil, gossip.BlockProc{}, err
 		}
+		fmt.Println("inputGenesis.Hash", inputGenesis.Hash.String())
 		if *genesisHash != inputGenesis.Hash {
 			err = &GenesisMismatchError{*genesisHash, inputGenesis.Hash}
 			return nil, nil, nil, nil, nil, gossip.BlockProc{}, err
 		}
 	}
 
+	fmt.Printf("Genesis hash before rawMakeEngine: %s", gdb.GetGenesisHash().String())
+
 	engine, vecClock, blockProc, err := rawMakeEngine(gdb, cdb, genesisStore.GetGenesis(), cfg, false)
 	if err != nil {
 		err = fmt.Errorf("failed to make engine1: %v", err)
 		return nil, nil, nil, nil, nil, gossip.BlockProc{}, err
 	}
+
+	fmt.Printf("Genesis hash after rawMakeEngine: %s", gdb.GetGenesisHash().String())
 
 	if *gdb.GetGenesisHash() != inputGenesis.Hash {
 		err = fmt.Errorf("genesis hash mismatch with genesis file header: %s != %s", gdb.GetGenesisHash().String(), inputGenesis.Hash.String())
