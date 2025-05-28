@@ -10,7 +10,7 @@ import (
 func TestFromString(t *testing.T) {
 	require := require.New(t)
 	exp := PubKey{
-		Type: Types.Secp256k1,
+		Type: Types.MLDsa87,
 		Raw:  common.FromHex("45b86101f804f3f4f2012ef31fff807e87de579a3faa7947d1b487a810e35dc2c3b6071ac465046634b5f4a8e09bf8e1f2e7eccb699356b9e6fd496ca4b1677d1"),
 	}
 	{
@@ -40,7 +40,7 @@ func TestFromString(t *testing.T) {
 func TestString(t *testing.T) {
 	require := require.New(t)
 	pk := PubKey{
-		Type: Types.Secp256k1,
+		Type: Types.MLDsa87,
 		Raw:  common.FromHex("45b86101f804f3f4f2012ef31fff807e87de579a3faa7947d1b487a810e35dc2c3b6071ac465046634b5f4a8e09bf8e1f2e7eccb699356b9e6fd496ca4b1677d1"),
 	}
 	require.Equal("0xc0045b86101f804f3f4f2012ef31fff807e87de579a3faa7947d1b487a810e35dc2c3b6071ac465046634b5f4a8e09bf8e1f2e7eccb699356b9e6fd496ca4b1677d1", pk.String())

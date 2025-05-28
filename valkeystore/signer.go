@@ -1,9 +1,8 @@
 package valkeystore
 
 import (
-	"crypto/ecdsa"
-
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/cloudflare/circl/sign/mldsa/mldsa87"
+	"github.com/ethereum/go-ethereum/cryptod"
 
 	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/validatorpk"
 	"github.com/Ncog-Earth-Chain/ncogearthchain/valkeystore/encryption"
@@ -24,7 +23,7 @@ func NewSigner(backend KeystoreI) *Signer {
 }
 
 func (s *Signer) Sign(pubkey validatorpk.PubKey, digest []byte) ([]byte, error) {
-	if pubkey.Type != validatorpk.Types.Secp256k1 {
+	if pubkey.Type != validatorpk.Types.MLDsa87 {
 		return nil, encryption.ErrNotSupportedType
 	}
 	key, err := s.backend.GetUnlocked(pubkey)
@@ -32,12 +31,12 @@ func (s *Signer) Sign(pubkey validatorpk.PubKey, digest []byte) ([]byte, error) 
 		return nil, err
 	}
 
-	secp256k1Key := key.Decoded.(*ecdsa.PrivateKey)
+	mldsa87Key := key.Decoded.(*mldsa87.PrivateKey)
 
-	sigRSV, err := crypto.Sign(digest, secp256k1Key)
+	sigRSV, err := cryptod.SignMLDsa87(mldsa87Key, digest)
 	if err != nil {
 		return nil, err
 	}
-	sigRS := sigRSV[:64]
-	return sigRS, err
+	// sigRS := sigRSV[:64]
+	return sigRSV, err
 }

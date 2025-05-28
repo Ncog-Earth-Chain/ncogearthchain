@@ -3,7 +3,7 @@ package valkeystore
 import (
 	"errors"
 
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/cryptod"
 
 	"github.com/Ncog-Earth-Chain/ncogearthchain/inter/validatorpk"
 	"github.com/Ncog-Earth-Chain/ncogearthchain/valkeystore/encryption"
@@ -30,10 +30,10 @@ func (m *MemKeystore) Add(pubkey validatorpk.PubKey, key []byte, auth string) er
 	if m.Has(pubkey) {
 		return ErrAlreadyExists
 	}
-	if pubkey.Type != validatorpk.Types.Secp256k1 {
+	if pubkey.Type != validatorpk.Types.MLDsa87 {
 		return encryption.ErrNotSupportedType
 	}
-	decoded, err := crypto.ToECDSA(key)
+	decoded, err := cryptod.ToMLDsa87(key)
 	if err != nil {
 		return err
 	}

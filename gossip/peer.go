@@ -107,7 +107,7 @@ func NewPeer(version int, p *p2p.Peer, rw p2p.MsgReadWriter, cfg PeerCacheConfig
 		knownTxs:            mapset.NewSet(),
 		knownEvents:         mapset.NewSet(),
 		queue:               make(chan broadcastItem, cfg.MaxQueuedItems),
-		queuedDataSemaphore: datasemaphore.New(dag.Metric{cfg.MaxQueuedItems, cfg.MaxQueuedSize}, warningFn),
+		queuedDataSemaphore: datasemaphore.New(dag.Metric{Num: cfg.MaxQueuedItems, Size: cfg.MaxQueuedSize}, warningFn),
 		term:                make(chan struct{}),
 	}
 }
@@ -190,7 +190,7 @@ func (p *peer) SendTransactionHashes(txids []common.Hash) error {
 }
 
 func memSize(v rlp.RawValue) dag.Metric {
-	return dag.Metric{1, uint64(len(v) + 1024)}
+	return dag.Metric{Num: 1, Size: uint64(len(v) + 1024)}
 }
 
 func (p *peer) asyncSendEncodedItem(raw rlp.RawValue, code uint64, queue chan broadcastItem) bool {

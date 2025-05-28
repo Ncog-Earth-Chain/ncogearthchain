@@ -87,11 +87,22 @@ func (a *Reader) Read(bits int) (v uint) {
 		panic(io.ErrUnexpectedEOF)
 	}*/
 
+	if a.byteOffset >= len(a.Bytes) {
+		a.byteOffset = len(a.Bytes) - 1
+	}
+
 	free := a.byteBitsFree()
 	if bits <= free {
 		toRead := bits
 		clear := 8 - (a.bitOffset + toRead)
-		v = zeroTopByteBits(uint(a.Bytes[a.byteOffset]), clear) >> a.bitOffset
+		// agar next byte slice ke bahar hai, treat as zero
+		var cur byte
+		if a.byteOffset < len(a.Bytes) {
+			cur = a.Bytes[a.byteOffset]
+		} else {
+			cur = a.Bytes[len(a.Bytes)-1]
+		}
+		v = zeroTopByteBits(uint(cur), clear) >> a.bitOffset
 		// increment offsets
 		if toRead == free {
 			a.bitOffset = 0

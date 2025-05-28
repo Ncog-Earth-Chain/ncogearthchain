@@ -29,7 +29,7 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	"github.com/ethereum/go-ethereum/core/rawdb"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/cryptod"
 	"github.com/ethereum/go-ethereum/params"
 
 	"github.com/Ncog-Earth-Chain/ncogearthchain/topicsdb"
@@ -69,8 +69,8 @@ func BenchmarkFilters(b *testing.B) {
 	backend.logIndex = topicsdb.New(table.New(ethdb2kvdb.Wrap(ldb), []byte("b")))
 
 	var (
-		key1, _ = crypto.HexToECDSA("b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291")
-		addr1   = crypto.PubkeyToAddress(key1.PublicKey)
+		key1, _ = cryptod.HexToMLDSA87PublicKey("b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291")
+		addr1   = cryptod.PubkeyToAddress(*key1)
 		addr2   = common.BytesToAddress([]byte("jeff"))
 		addr3   = common.BytesToAddress([]byte("ethereum"))
 		addr4   = common.BytesToAddress([]byte("random addresses please"))
@@ -115,8 +115,8 @@ func BenchmarkFilters(b *testing.B) {
 func TestFilters(t *testing.T) {
 	var (
 		backend = newTestBackend()
-		key1, _ = crypto.HexToECDSA("b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291")
-		addr    = crypto.PubkeyToAddress(key1.PublicKey)
+		key1, _ = cryptod.HexToMLDSA87PublicKey("b71c71a67e1177ad4e901695e1b4b9ee17ae16c6668d313eac2f96dbcda3f291")
+		addr    = cryptod.PubkeyToAddress(*key1)
 
 		hash1 = common.BytesToHash([]byte("topic1"))
 		hash2 = common.BytesToHash([]byte("topic2"))

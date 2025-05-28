@@ -59,9 +59,9 @@ func DefaultConfig() Config {
 
 		EmitIntervals: EmitIntervals{
 			Min:                        110 * time.Millisecond,
-			Max:                        10 * time.Minute,
+			Max:                        10 * time.Second,
 			Confirming:                 120 * time.Millisecond,
-			DoublesignProtection:       27 * time.Minute, // should be greater than MaxEmitInterval
+			DoublesignProtection:       27 * time.Second, // should be greater than MaxEmitInterval
 			ParallelInstanceProtection: 1 * time.Minute,
 		},
 

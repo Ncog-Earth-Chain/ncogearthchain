@@ -32,8 +32,6 @@ func (s *Helper) Get(table kvdb.Store, key []byte, to interface{}) interface{} {
 		return nil
 	}
 
-	//fmt.Println("testing", key)
-
 	err = rlp.DecodeBytes(buf, to)
 	if err != nil {
 		s.Log.Crit("Failed to decode rlp", "err", err, "size", len(buf))
