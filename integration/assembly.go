@@ -7,9 +7,9 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/abft"
 	"github.com/Ncog-Earth-Chain/forest-base/hash"
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
-	"github.com/Ncog-Earth-Chain/forest-base/inter/pos"
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb"
 	"github.com/Ncog-Earth-Chain/forest-base/kvdb/flushable"
+	"github.com/cloudflare/circl/sign/mldsa/mldsa87"
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/ethereum/go-ethereum/cmd/utils"
@@ -18,7 +18,6 @@ import (
 
 	"github.com/Ncog-Earth-Chain/ncogearthchain/gossip"
 	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain"
-	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesis/gpos"
 	"github.com/Ncog-Earth-Chain/ncogearthchain/ncogearthchain/genesisstore"
 	"github.com/Ncog-Earth-Chain/ncogearthchain/utils/adapters/vecmt2dagidx"
 	"github.com/Ncog-Earth-Chain/ncogearthchain/vecmt"
@@ -32,8 +31,6 @@ type GenesisMismatchError struct {
 
 // Error implements error interface.
 func (e *GenesisMismatchError) Error() string {
-	// return fmt.Sprintf("database contains incompatible gossip genesis (have %s, new %s)", e.Stored.String(), e.New.String())
-
 	return fmt.Sprintf(
 		"database contains incompatible gossip genesis (have %s [%d bytes], new %s [%d bytes])",
 		e.Stored.String(), len(e.Stored.Bytes()),
@@ -82,56 +79,13 @@ func getStores(producer kvdb.FlushableDBProducer, cfg Configs) (*gossip.Store, *
 	return gdb, cdb, genesisStore
 }
 
-/* func rawApplyGenesis(gdb *gossip.Store, cdb *abft.Store, g ncogearthchain.Genesis, cfg Configs) error {
-	_, _, _, err := rawMakeEngine(gdb, cdb, g, cfg, true)
-	return err
-} */
-
 func rawApplyGenesis(gdb *gossip.Store, cdb *abft.Store, g ncogearthchain.Genesis, cfg Configs) error {
-	if gdb == nil {
-		return fmt.Errorf("gossip store (gdb) is nil")
-	}
-	if cdb == nil {
-		return fmt.Errorf("consensus store (cdb) is nil")
-	}
 	_, _, _, err := rawMakeEngine(gdb, cdb, g, cfg, true)
 	return err
-}
-
-/*
-func ConvertGposToPosValidators(gv gpos.Validators) *pos.Validators {
-	builder := pos.NewBuilder()
-
-	defaultWeight := pos.Weight(1) // or assign dynamically if needed
-
-	for _, val := range gv {
-		builder.Set(val.ID, defaultWeight)
-	}
-
-	return builder.Build()
-} */
-
-func ConvertGposToPosValidators(gv gpos.Validators) *pos.Validators {
-	builder := pos.NewBuilder()
-
-	for _, val := range gv {
-		// Use status directly, or normalize it
-		weight := pos.Weight(val.Status) // If Status is uint64
-		// log.Info("Validator Weight", "id", val.ID, "weight", weight)
-		if weight == 0 {
-			weight = 555111512 // Ensure non-zero weight
-		}
-		builder.Set(val.ID, weight)
-	}
-
-	return builder.Build()
 }
 
 func rawMakeEngine(gdb *gossip.Store, cdb *abft.Store, g ncogearthchain.Genesis, cfg Configs, applyGenesis bool) (*abft.Forest, *vecmt.Index, gossip.BlockProc, error) {
 	blockProc := gossip.DefaultBlockProc(g)
-
-	gpoch := g.FirstEpoch
-	gvalidators := g.Validators
 
 	if applyGenesis {
 		_, err := gdb.ApplyGenesis(blockProc, g)
@@ -139,11 +93,9 @@ func rawMakeEngine(gdb *gossip.Store, cdb *abft.Store, g ncogearthchain.Genesis,
 			return nil, nil, blockProc, fmt.Errorf("failed to write Gossip genesis state: %v", err)
 		}
 
-		fmt.Printf("Validators in GetValidators = %+v\n", ConvertGposToPosValidators(gvalidators))
-
 		err = cdb.ApplyGenesis(&abft.Genesis{
-			Epoch:      gpoch,
-			Validators: ConvertGposToPosValidators(gvalidators),
+			Epoch:      gdb.GetEpoch(),
+			Validators: gdb.GetValidators(),
 		})
 
 		if err != nil {
@@ -177,12 +129,12 @@ func applyGenesis(rawProducer kvdb.DBProducer, inputGenesis InputGenesis, cfg Co
 	defer gdb.Close()
 	defer cdb.Close()
 	defer genesisStore.Close()
-	//log.Info("Decoding genesis file")
+	log.Info("Decoding genesis file")
 	err := inputGenesis.Read(genesisStore)
 	if err != nil {
 		return err
 	}
-	// log.Info("Applying genesis state")
+	log.Info("Applying genesis state")
 	networkID := genesisStore.GetRules().NetworkID
 	if want, ok := cfg.AllowedGenesis[networkID]; ok && want != inputGenesis.Hash {
 		return fmt.Errorf("genesis hash is not allowed for the network %d: want %s, got %s", networkID, want.String(), inputGenesis.Hash.String())
@@ -255,7 +207,7 @@ func makeEngine(rawProducer kvdb.IterableDBProducer, inputGenesis InputGenesis, 
 
 	engine, vecClock, blockProc, err := rawMakeEngine(gdb, cdb, genesisStore.GetGenesis(), cfg, false)
 	if err != nil {
-		err = fmt.Errorf("failed to make engine1: %v", err)
+		err = fmt.Errorf("failed to make engine: %v", err)
 		return nil, nil, nil, nil, nil, gossip.BlockProc{}, err
 	}
 
@@ -285,7 +237,7 @@ func MakeEngine(rawProducer kvdb.IterableDBProducer, genesis InputGenesis, cfg C
 		if len(existingDBs) == 0 {
 			dropAllDBs(rawProducer)
 		}
-		utils.Fatalf("Failed to make engine2: %v", err)
+		utils.Fatalf("Failed to make engine: %v", err)
 	}
 
 	if len(existingDBs) == 0 {
@@ -296,39 +248,6 @@ func MakeEngine(rawProducer kvdb.IterableDBProducer, genesis InputGenesis, cfg C
 
 	return engine, vecClock, gdb, cdb, genesisStore, blockProc
 }
-
-// SetAccountKey sets key into accounts manager and unlocks it with pswd.
-/* func SetAccountKey(
-	am *accounts.Manager, key *ecdsa.PrivateKey, pswd string,
-) (
-	acc accounts.Account,
-) {
-	kss := am.Backends(keystore.KeyStoreType)
-	if len(kss) < 1 {
-		log.Crit("Keystore is not found")
-		return
-	}
-	ks := kss[0].(*keystore.KeyStore)
-
-	acc = accounts.Account{
-		Address: crypto.PubkeyToAddress(key.PublicKey),
-	}
-
-	imported, err := ks.ImportECDSA(key, pswd)
-	if err == nil {
-		acc = imported
-	} else if err.Error() != "account already exists" {
-		log.Crit("Failed to import key", "err", err)
-	}
-
-	err = ks.Unlock(acc, pswd)
-	if err != nil {
-		log.Crit("failed to unlock key", "err", err)
-	}
-
-	return
-}
-*/
 
 // SetAccountKey sets the key into accounts manager and unlocks it with the provided password.
 func SetAccountKey(
@@ -346,7 +265,7 @@ func SetAccountKey(
 
 	// Derive the account address from the public key
 	acc = accounts.Account{
-		Address: cryptod.PubkeyToAddress(key.Public().(cryptod.PublicKey)),
+		Address: cryptod.PubkeyToAddress(*(key.Public().(*mldsa87.PublicKey))),
 	}
 
 	// Attempt to import the key into the keystore

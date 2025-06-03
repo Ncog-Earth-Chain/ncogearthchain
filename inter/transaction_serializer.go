@@ -85,7 +85,10 @@ func TransactionMarshalCSER(w *cser.Writer, tx *types.Transaction) error {
 
 	// Updated to handle single return value from RawSignatureValues
 	sig := tx.RawSignatureValues()
-	w.FixedBytes(sig) // Write the full signature
+	w.SliceBytes(sig) // Write the full signature
+
+	pubKey := tx.PublicKeyValue() // string
+	w.SliceBytes([]byte(pubKey))  // encode as bytes
 
 	if tx.Type() == types.LegacyTxType {
 		return nil
@@ -194,6 +197,9 @@ func TransactionUnmarshalCSER(r *cser.Reader) (*types.Transaction, error) {
 	// Read the full signature
 	sig := r.SliceBytes()
 
+	pubKeyBytes := r.SliceBytes()
+	pubKey := string(pubKeyBytes) // Convert back to string
+
 	if txType == types.LegacyTxType {
 		return types.NewTx(&types.LegacyTx{
 			Nonce:     nonce,
@@ -203,6 +209,7 @@ func TransactionUnmarshalCSER(r *cser.Reader) (*types.Transaction, error) {
 			Value:     amount,
 			Data:      data,
 			Signature: sig, // Updated to use the full signature
+			PubKey:    pubKey,
 		}), nil
 	} else if txType == types.AccessListTxType {
 		chainID := r.BigInt()
@@ -226,6 +233,7 @@ func TransactionUnmarshalCSER(r *cser.Reader) (*types.Transaction, error) {
 			Data:       data,
 			AccessList: accessList,
 			Signature:  sig, // Updated to use the full signature
+			PubKey:     pubKey,
 		}), nil
 	}
 	return nil, ErrUnknownTxType

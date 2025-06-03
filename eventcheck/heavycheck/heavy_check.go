@@ -11,7 +11,7 @@ import (
 	"github.com/Ncog-Earth-Chain/forest-base/inter/dag"
 	"github.com/Ncog-Earth-Chain/forest-base/inter/idx"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/cryptod"
 	"github.com/ethereum/go-ethereum/trie"
 
 	"github.com/Ncog-Earth-Chain/ncogearthchain/inter"
@@ -107,12 +107,16 @@ func (v *Checker) Enqueue(tasks []queuedcheck.EventTask, onValidated func([]queu
 
 // verifySignature checks the signature against e.Creator.
 func verifySignature(e inter.EventPayloadI, pubkey validatorpk.PubKey) bool {
-	if pubkey.Type != validatorpk.Types.Secp256k1 {
+	if pubkey.Type != validatorpk.Types.MLDsa87 {
 		return false
 	}
 	signedHash := e.HashToSign().Bytes()
 	sig := e.Sig()
-	return crypto.VerifySignature(pubkey.Raw, signedHash, sig.Bytes())
+	publicKey, err := cryptod.UnmarshalPubkey(pubkey.Raw)
+	if err != nil {
+		return false
+	}
+	return cryptod.ValidateMLDsa87Signature(publicKey, signedHash, sig.Bytes())
 }
 
 // Validate event

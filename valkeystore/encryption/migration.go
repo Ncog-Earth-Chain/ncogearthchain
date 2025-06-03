@@ -29,7 +29,7 @@ func MigrateAccountToValidatorKey(acckeypath string, valkeypath string, pubkey v
 	}
 
 	valk := EncryptedKeyJSON{
-		Type:      validatorpk.Types.Secp256k1,
+		Type:      validatorpk.Types.MLDsa87,
 		PublicKey: common.Bytes2Hex(pubkey.Raw),
 		Crypto:    acck.Crypto,
 	}

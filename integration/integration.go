@@ -21,10 +21,7 @@ var (
 )
 
 // NewIntegration creates gossip service for the integration test
-// NewIntegration creates a gossip service for the integration test
 func NewIntegration(ctx *adapters.ServiceContext, genesis InputGenesis, stack *node.Node) *gossip.Service {
-
-	//fmt.Println("testing NewIntegration", "test")
 
 	gossipCfg := gossip.FakeConfig(1, cachescale.Identity)
 	cfg := Configs{
@@ -74,55 +71,3 @@ func NewIntegration(ctx *adapters.ServiceContext, genesis InputGenesis, stack *n
 
 	return svc
 }
-
-/* func NewIntegration(ctx *adapters.ServiceContext, genesis InputGenesis, stack *node.Node) *gossip.Service {
-
-	fmt.Println("testing NewIntegration", "test")
-
-	gossipCfg := gossip.FakeConfig(1, cachescale.Identity)
-	cfg := Configs{
-		Ncogearthchain:      gossipCfg,
-		NcogearthchainStore: gossip.DefaultStoreConfig(cachescale.Identity),
-		Forest:              abft.DefaultConfig(),
-		ForestStore:         abft.DefaultStoreConfig(cachescale.Identity),
-		VectorClock:         vecmt.DefaultConfig(cachescale.Identity),
-	}
-
-	engine, dagIndex, gdb, _, _, blockProc := MakeEngine(DBProducer(ctx.Config.DataDir, cachescale.Identity), genesis, cfg)
-	_ = genesis.Close()
-
-	valKeystore := valkeystore.NewDefaultMemKeystore()
-
-	pubKey := validatorpk.PubKey{
-		Raw:  crypto.FromECDSAPub(&ctx.Config.PrivateKey.PublicKey),
-		Type: validatorpk.Types.Secp256k1,
-	}
-
-	// unlock the key
-	_ = valKeystore.Add(pubKey, crypto.FromECDSA(ctx.Config.PrivateKey), validatorpk.FakePassword)
-	_ = valKeystore.Unlock(pubKey, validatorpk.FakePassword)
-	signer := valkeystore.NewSigner(valKeystore)
-
-	// find a genesis validator which corresponds to the key
-	for id, v := range gdb.GetEpochState().ValidatorProfiles {
-		if v.PubKey.String() == pubKey.String() {
-			gossipCfg.Emitter.Validator.ID = id
-			gossipCfg.Emitter.Validator.PubKey = v.PubKey
-		}
-	}
-
-	gossipCfg.Emitter.EmitIntervals.Max = 3 * time.Second
-	gossipCfg.Emitter.EmitIntervals.DoublesignProtection = 0
-
-	svc, err := gossip.NewService(stack, gossipCfg, gdb, signer, blockProc, engine, dagIndex)
-	if err != nil {
-		panic(err)
-	}
-	err = engine.Bootstrap(svc.GetConsensusCallbacks())
-	if err != nil {
-		return nil
-	}
-
-	return svc
-}
-*/

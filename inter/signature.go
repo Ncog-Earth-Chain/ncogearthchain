@@ -1,6 +1,6 @@
 package inter
 
-const SigSize = 64
+const SigSize = 4627
 
 // Signature is a secp256k1 in R|S format
 type Signature [SigSize]byte
