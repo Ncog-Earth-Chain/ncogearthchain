@@ -96,15 +96,6 @@ require (
 	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c // indirect
 )
 
-// replace github.com/ethereum/go-ethereum => github.com/Ncog-Earth-Chain/go-ethereum v1.0.5
-// replace github.com/ethereum/go-ethereum => github.com/yashveerncog/ncogevm_v2 v1.0.3
-
 replace github.com/ethereum/go-ethereum => github.com/Ncog-Earth-Chain/ncog-evm v1.0.0
-
-//replace github.com/ethereum/go-ethereum => /var/www/html/Ncog-Earth-Chain/ethereum/v4/ncogevm_v2
-
-// replace github.com/ethereum/go-ethereum => /var/www/html/Ncog-Earth-Chain/ethereum/ncog-evm
-
-// replace github.com/Ncog-Earth-Chain/forest-base => /var/www/html/Ncog-Earth-Chain/forest-base
 
 replace github.com/dvyukov/go-fuzz => github.com/guzenok/go-fuzz v0.0.0-20210103140116-f9104dfb626f
